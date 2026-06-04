@@ -99,7 +99,7 @@ const Users = () => {
               <th>User</th>
               <th>Email</th>
               <th>Role</th>
-              <th>Status</th>
+              <th>Lockout</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -140,7 +140,7 @@ const Users = () => {
                 <td className="px-6 py-2">
                   <span
                     className={`inline-flex items-center text-xs font-medium ${
-                      user.lockoutEnabled ? "text-red-500" : "text-emerald-500"
+                      user.lockoutEnabled ? "text-emerald-500" : "text-red-500"
                     }`}
                   >
                     <span
@@ -148,7 +148,7 @@ const Users = () => {
                         user.lockoutEnabled ? "bg-red-500" : "bg-emerald-500"
                       }`}
                     />
-                    {user.lockoutEnabled ? "Locked" : "Active"}
+                    {user.lockoutEnabled ? "Disabled" : "Locked"}
                   </span>
                 </td>
 
