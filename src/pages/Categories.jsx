@@ -19,6 +19,7 @@ const Category = () => {
 
   return (
     <section className="py-10 gap-10 flex flex-col min-h-screen items-center text-center">
+      <title>Categories - ElectRa</title>
       <article className="flex flex-col gap-10 p-3">
         {categories.map((category) => {
           return (

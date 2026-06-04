@@ -12,6 +12,7 @@ import { useProducts } from "../context/ProductContext";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import api from "../api/client";
+import { Helmet } from "react-helmet";
 
 const Products = () => {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -52,6 +53,9 @@ const Products = () => {
 
   return (
     <section className="min-h-screen container mx-auto flex gap-5 py-10">
+      <Helmet>
+        <title>Products - ElectRa</title>
+      </Helmet>
       <div
         onClick={() => setFilterOpen(false)}
         className={`fixed inset-0 bg-black/40 z-40 lg:hidden ${

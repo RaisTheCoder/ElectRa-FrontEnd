@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const NotFound = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 text-center px-6">
+      <title>Not Found - ElectRa</title>
       <h1 className="text-7xl font-bold text-[#0A9ACF]">404</h1>
 
       <p className="text-2xl font-semibold mt-4">Page not found</p>

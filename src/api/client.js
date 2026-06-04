@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://localhost:7003/api",
+  baseURL: "http://electra-api.runasp.net/api",
   withCredentials: true,
 });
 

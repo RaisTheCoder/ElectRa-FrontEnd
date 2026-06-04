@@ -15,6 +15,7 @@ const About = () => {
 
   return (
     <section className="min-h-screen">
+      <title>About Us - ElectRa</title>
       <section
         id="hero"
         className="flex h-[50vh] justify-center items-center"

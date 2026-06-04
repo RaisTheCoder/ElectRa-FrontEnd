@@ -30,6 +30,7 @@ const Home = () => {
 
   return (
     <section id="home" className="min-h-screen">
+      <title>Home - ElectRa</title>
       <section
         id="hero"
         className="flex h-screen lg:h-[47vh] justify-center items-center"

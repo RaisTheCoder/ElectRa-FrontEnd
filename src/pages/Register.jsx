@@ -35,6 +35,9 @@ const Register = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <Helmet>
+        <title>Sign Up - ElectRa</title>
+      </Helmet>
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
         <div className="text-center space-y-1">
           <h3 className="text-2xl font-bold">Register</h3>

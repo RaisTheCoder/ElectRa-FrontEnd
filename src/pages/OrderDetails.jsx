@@ -39,6 +39,7 @@ const OrderDetails = () => {
 
   return (
     <section className="flex relative min-h-screen py-10 px-5 justify-center">
+      <title>Order #{order.id} - ElectRa</title>
       <div className="container relative max-w-6xl flex flex-col gap-5">
         <button
           onClick={() => {

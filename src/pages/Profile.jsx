@@ -10,6 +10,7 @@ import {
 import { useFormik } from "formik";
 import api from "../api/client";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 const Profile = () => {
   const { user, fetchUser } = useAuth();
@@ -115,6 +116,11 @@ const Profile = () => {
 
   return (
     <section className="min-h-screen py-10 px-5 bg-gray-50">
+      <Helmet>
+        <title>
+          {user?.firstName} {user?.lastName} - ElectRa
+        </title>
+      </Helmet>
       <div className="container mx-auto flex flex-col gap-8">
         <div className="bg-gray-200 shadow-sm rounded-2xl p-6">
           <div className="flex flex-col md:flex-row items-center gap-6">

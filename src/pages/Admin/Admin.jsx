@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link, Navigate, Outlet } from "react-router";
 import { useAuth } from "../../context/AuthContext";
+import { Helmet } from "react-helmet";
 
 const Admin = () => {
   const { user, loading } = useAuth();
@@ -23,6 +24,9 @@ const Admin = () => {
 
   return (
     <section className="min-h-screen w-full flex flex-col py-10 items-center gap-5">
+      <Helmet>
+        <title>Admin - ElectRa</title>
+      </Helmet>
       <div className="container grid grid-cols-1 lg:grid-cols-[auto_1fr] w-full lg:min-h-[75vh] p-5 gap-5">
         <aside className="relative h-">
           <div className="sticky h-fit top-25 flex lg:flex-col overflow-x-scroll gap-5">

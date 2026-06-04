@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const Terms = () => {
   return (
@@ -6,6 +7,9 @@ const Terms = () => {
       id="terms"
       className="flex justify-center py-15 min-h-screen w-full"
     >
+      <Helmet>
+        <title>Terms of Service - ElectRa</title>
+      </Helmet>
       <article className="flex justify-center text-center flex-col">
         <h1 className="font-bold text-[40px]">Terms of Service</h1>
         <p className="w-90 md:w-150 lg:w-250">

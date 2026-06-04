@@ -12,6 +12,7 @@ const Cart = () => {
 
   return (
     <section className="min-h-screen py-10">
+      <title>Cart - ElectRa</title>
       <div className="container mx-auto flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row gap-10 items-stretch lg:items-start">
           <div className="flex-1 flex flex-col gap-3 px-8 sm:px-0">

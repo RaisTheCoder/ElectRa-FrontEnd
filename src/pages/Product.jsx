@@ -62,6 +62,9 @@ const Product = () => {
 
   return (
     <section className="relative gap-15 lg:container py-10 px-5 flex flex-col self-center min-h-screen w-full">
+      <Helmet>
+        <title>{product.title} - ElectRa</title>
+      </Helmet>
       <button
         onClick={() => {
           navi("../");
