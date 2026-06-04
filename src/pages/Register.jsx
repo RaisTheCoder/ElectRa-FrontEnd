@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterSchema } from "../components/Validation/RegisterSchema";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import api from "../api/client";
 
 const Register = () => {
   const [tos, setTos] = useState(false);
@@ -22,7 +22,7 @@ const Register = () => {
     },
     onSubmit: async () => {
       try {
-        await axios.post("/api/account/register", values);
+        await api.post("/account/register", values);
         navi("/");
       } catch (err) {
         console.log(err.response?.data);
@@ -64,6 +64,8 @@ const Register = () => {
               placeholder="Last Name"
             />
           </div>
+          <span className="text-red-500">{errors.firstName}</span>
+          <span className="text-red-500">{errors.lastName}</span>
 
           <input
             className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -73,6 +75,7 @@ const Register = () => {
             name="username"
             placeholder="Username"
           />
+          <span className="text-red-500">{errors.username}</span>
 
           <input
             className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -82,6 +85,7 @@ const Register = () => {
             name="email"
             placeholder="Email Address"
           />
+          <span className="text-red-500">{errors.email}</span>
 
           <input
             className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -91,6 +95,7 @@ const Register = () => {
             name="phone"
             placeholder="Phone Number"
           />
+          <span className="text-red-500">{errors.phone}</span>
 
           <input
             className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -100,6 +105,7 @@ const Register = () => {
             name="password"
             placeholder="Password"
           />
+          <span className="text-red-500">{errors.password}</span>
 
           <input
             className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -109,6 +115,7 @@ const Register = () => {
             name="confirmPassword"
             placeholder="Confirm Password"
           />
+          <span className="text-red-500">{errors.confirmPassword}</span>
 
           <div className="space-y-3 text-sm text-gray-600">
             <label className="flex gap-2 items-start">

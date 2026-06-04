@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://electra-api.runasp.net/api",
+  baseURL: "https://electra.gameplayblits.workers.dev/api",
   withCredentials: true,
 });
 
