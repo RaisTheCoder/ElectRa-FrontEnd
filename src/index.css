@@ -1,0 +1,294 @@
+@import "tailwindcss";
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+:root {
+  --electra-blue: #0a99cf;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+td {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.pfp {
+  height: 50px;
+  width: 50px;
+  border-radius: 50% !important;
+}
+
+.pfp-3xl {
+  height: 300px;
+  width: 300px;
+  border-radius: 50% !important;
+}
+
+/* Button */
+button {
+  cursor: pointer;
+}
+
+.button {
+  padding: 8px;
+  background-color: rgba(128, 128, 128, 0.2);
+  transition: 0.2s;
+  border-radius: 8px;
+}
+
+.button:hover {
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+.button.primary {
+  color: white !important;
+  background-color: #0a9acf !important;
+}
+
+.button.primary:hover {
+  background-color: #0887b5 !important;
+}
+
+.button.primary:active {
+  background-color: #06749c !important;
+}
+
+/* Form */
+.formStyle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 25px;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.formGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  border-radius: 8px;
+  background-color: #e5e7eb;
+  padding: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.yupError {
+  color: rgb(255, 110, 110);
+}
+
+/* Table */
+.app-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+}
+
+.app-table td,
+.app-table th {
+  padding: 10px 16px;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.app-table thead {
+  background: #f9fafb;
+}
+
+.app-table thead th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.app-table thead th:last-child {
+  text-align: center;
+  width: 100px;
+}
+
+.app-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s ease;
+}
+
+.app-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.app-table td,
+.app-table th {
+  vertical-align: middle;
+  padding: 10px 16px;
+  color: #374151;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-table td {
+  display: table-cell;
+}
+
+.app-table td.user-cell {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.app-table td.user-cell img {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  margin-right: 6px;
+}
+
+.status.active {
+  color: #059669;
+}
+
+.status.active .status-dot {
+  background: #059669;
+}
+
+.status.locked {
+  color: #dc2626;
+}
+
+.status.locked .status-dot {
+  background: #dc2626;
+}
+
+.app-table td.actions-cell {
+  width: 100px;
+  white-space: nowrap;
+}
+
+.app-table td.actions-cell div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.app-table .action-btn {
+  width: 100%;
+  height: 12px;
+  padding: 8px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #f3f4f6;
+  border: none;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.app-table .action-btn:hover {
+  background: #e5e7eb;
+}
+
+.product-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .app-table thead {
+    display: none;
+  }
+
+  .app-table,
+  .app-table tbody,
+  .app-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .app-table tr {
+    margin-bottom: 12px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+
+  .app-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    white-space: normal;
+  }
+
+  .app-table td.actions-cell {
+    justify-content: start;
+    width: fit-content;
+  }
+
+  .app-table td.actions-cell div {
+    flex-direction: row;
+    justify-content: start;
+    width: fit-content;
+  }
+
+  .app-table td.actions-cell .action-btn {
+    padding: 0;
+    height: 32px;
+    width: 32px;
+  }
+}
