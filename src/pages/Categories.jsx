@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import api from "../api/client";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -19,7 +20,9 @@ const Category = () => {
 
   return (
     <section className="py-10 gap-10 flex flex-col min-h-screen items-center text-center">
-      <title>Categories - ElectRa</title>
+      <Helmet>
+        <title>Categories - ElectRa</title>
+      </Helmet>
       <article className="flex flex-col gap-10 p-3">
         {categories.map((category) => {
           return (

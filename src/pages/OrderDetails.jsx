@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import api from "../api/client";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from "react-helmet";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -39,7 +40,9 @@ const OrderDetails = () => {
 
   return (
     <section className="flex relative min-h-screen py-10 px-5 justify-center">
-      <title>Order #{order.id} - ElectRa</title>
+      <Helmet>
+        <title>Order #{order.id} - ElectRa</title>
+      </Helmet>
       <div className="container relative max-w-6xl flex flex-col gap-5">
         <button
           onClick={() => {

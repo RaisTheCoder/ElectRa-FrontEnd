@@ -7,6 +7,7 @@ import {
 import React, { useEffect } from "react";
 import { Link } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from "react-helmet";
 
 const About = () => {
   useEffect(() => {
@@ -15,7 +16,9 @@ const About = () => {
 
   return (
     <section className="min-h-screen">
-      <title>About Us - ElectRa</title>
+      <Helmet>
+        <title>About Us - ElectRa</title>
+      </Helmet>
       <section
         id="hero"
         className="flex h-[50vh] justify-center items-center"

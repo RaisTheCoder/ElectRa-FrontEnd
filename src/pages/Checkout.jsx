@@ -5,6 +5,7 @@ import api from "../api/client";
 import { CheckoutSchema } from "../components/Validation/CheckoutSchema";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 const Checkout = () => {
   const {
@@ -95,7 +96,9 @@ const Checkout = () => {
 
   return (
     <section className="min-h-screen bg-gray-100 flex justify-center p-4">
-      <title>Checkout - ElectRa</title>
+      <Helmet>
+        <title>Checkout - ElectRa</title>
+      </Helmet>
       <div className="w-full max-w-5xl grid md:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow p-6 space-y-4">
           <h2 className="text-xl font-bold">Your Cart</h2>

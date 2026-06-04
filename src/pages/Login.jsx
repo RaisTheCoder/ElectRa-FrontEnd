@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { GoogleLogin } from "@react-oauth/google";
 import api from "../api/client";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navi = useNavigate();
@@ -34,7 +35,9 @@ const Login = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <title>Sign In - ElectRa</title>
+      <Helmet>
+        <title>Sign In - ElectRa</title>
+      </Helmet>
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
         <div className="text-center space-y-1">
           <h3 className="text-2xl font-bold">Welcome back</h3>

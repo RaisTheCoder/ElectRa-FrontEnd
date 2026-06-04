@@ -14,6 +14,7 @@ import "swiper/css";
 import { useCart } from "../context/CartContext";
 import { TailSpin } from "react-loader-spinner";
 import { useProducts } from "../context/ProductContext";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const { products, loading, fetch } = useProducts();
@@ -30,7 +31,9 @@ const Home = () => {
 
   return (
     <section id="home" className="min-h-screen">
-      <title>Home - ElectRa</title>
+      <Helmet>
+        <title>Home - ElectRa</title>
+      </Helmet>
       <section
         id="hero"
         className="flex h-screen lg:h-[47vh] justify-center items-center"

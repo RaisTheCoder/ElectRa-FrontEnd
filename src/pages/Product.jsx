@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import api from "../api/client";
 import { useProducts } from "../context/ProductContext";
 import { useAuth } from "../context/AuthContext";
+import { Helmet } from "react-helmet";
 
 const Product = () => {
   const { id } = useParams();

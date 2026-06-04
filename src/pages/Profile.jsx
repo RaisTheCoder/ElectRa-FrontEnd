@@ -162,42 +162,42 @@ const Profile = () => {
               ) : (
                 <div className="flex flex-col gap-3">
                   <input
-                    className="input"
+                    className="input bg-white"
                     name="firstName"
                     value={values.firstName}
                     onChange={handleChange}
                     placeholder="First name"
                   />
                   <input
-                    className="input"
+                    className="input bg-white"
                     name="lastName"
                     value={values.lastName}
                     onChange={handleChange}
                     placeholder="Last name"
                   />
                   <input
-                    className="input"
+                    className="input bg-white"
                     name="username"
                     value={values.username}
                     onChange={handleChange}
                     placeholder="Username"
                   />
                   <input
-                    className="input"
+                    className="input bg-white"
                     name="email"
                     value={values.email}
                     onChange={handleChange}
                     placeholder="Email"
                   />
                   <input
-                    className="input"
+                    className="input bg-white"
                     name="address"
                     value={values.address}
                     onChange={handleChange}
                     placeholder="Address"
                   />
                   <input
-                    className="input"
+                    className="input bg-white"
                     name="phone"
                     value={values.phone}
                     onChange={handleChange}
@@ -218,7 +218,7 @@ const Profile = () => {
                     {showPassword && (
                       <div className="flex flex-col gap-2 mt-2">
                         <input
-                          className="input"
+                          className="input bg-white"
                           type="password"
                           name="currentPassword"
                           value={values.currentPassword}
@@ -226,7 +226,7 @@ const Profile = () => {
                           placeholder="Current password"
                         />
                         <input
-                          className="input"
+                          className="input bg-white"
                           type="password"
                           name="newPassword"
                           value={values.newPassword}

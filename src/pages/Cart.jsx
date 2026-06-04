@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useCart } from "../context/CartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const Cart = () => {
   const navi = useNavigate();
@@ -12,7 +13,9 @@ const Cart = () => {
 
   return (
     <section className="min-h-screen py-10">
-      <title>Cart - ElectRa</title>
+      <Helmet>
+        <title>Cart - ElectRa</title>
+      </Helmet>
       <div className="container mx-auto flex flex-col gap-5">
         <div className="flex flex-col lg:flex-row gap-10 items-stretch lg:items-start">
           <div className="flex-1 flex flex-col gap-3 px-8 sm:px-0">
