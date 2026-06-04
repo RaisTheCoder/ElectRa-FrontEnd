@@ -60,8 +60,8 @@ const Checkout = () => {
 
   const formik = useFormik({
     initialValues: {
-      address: "",
-      phone: "",
+      address: user?.address || "",
+      phone: user?.phone || "",
       note: "",
     },
     validationSchema: CheckoutSchema,

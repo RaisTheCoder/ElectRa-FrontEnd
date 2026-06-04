@@ -28,6 +28,8 @@ const Profile = () => {
     "Cancelled",
   ];
 
+  const [profileFile, setProfileFile] = useState(null);
+
   const { values, handleChange, handleSubmit, setFieldValue, resetForm } =
     useFormik({
       initialValues: {
@@ -37,7 +39,6 @@ const Profile = () => {
         address: user?.address || "",
         phone: user?.phoneNumber || "",
         email: user?.email || "",
-        profilePic: "",
         currentPassword: "",
         newPassword: "",
       },
@@ -53,8 +54,8 @@ const Profile = () => {
         formData.append("phoneNumber", values.phone);
         formData.append("email", values.email);
 
-        if (values.profilePic instanceof File) {
-          formData.append("formFile", values.profilePic);
+        if (profileFile) {
+          formData.append("formFile", profileFile);
         }
 
         if (values.currentPassword && values.newPassword) {
@@ -127,8 +128,8 @@ const Profile = () => {
             <div className="relative">
               <img
                 src={
-                  values.profilePic instanceof File
-                    ? URL.createObjectURL(values.profilePic)
+                  profileFile
+                    ? URL.createObjectURL(profileFile)
                     : user?.profilePic || "/placeholder-avatar.jpg"
                 }
                 className="w-28 h-28 rounded-full object-cover "
@@ -139,9 +140,11 @@ const Profile = () => {
                 <input
                   type="file"
                   className="absolute inset-0 opacity-0 cursor-pointer"
-                  onChange={(e) =>
-                    setFieldValue("profilePic", e.currentTarget.files[0])
-                  }
+                  onChange={(e) => {
+                    Math.round(e.target.files[0].size / 1024) >= 2048
+                      ? null
+                      : setProfileFile(e.currentTarget.files[0]);
+                  }}
                 />
               )}
             </div>
