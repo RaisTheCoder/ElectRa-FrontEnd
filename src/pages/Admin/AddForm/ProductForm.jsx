@@ -24,7 +24,7 @@ const ProductForm = () => {
       thumbnail: product.thumbnail || "",
       subCategoryId: product?.subCategory?.id || 0,
       brand: product?.brand?.id || 0,
-      price: product.price || 1,
+      price: product.originalPrice || 1,
       stock: product.stock || 1,
       isFeatured: product.isFeatured || false,
       discountPercentage: product.discountPercentage || 0,
