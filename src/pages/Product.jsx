@@ -213,7 +213,7 @@ const Product = () => {
                         key={i}
                         icon={faStar}
                         className={
-                          product.rating >= i
+                          review?.rating >= i
                             ? "text-orange-400"
                             : "text-gray-300"
                         }
@@ -221,7 +221,7 @@ const Product = () => {
                     ))}
 
                     <span className="text-xs text-gray-500 ml-1">
-                      {product.rating?.toFixed(1) || "0.0"}
+                      {review?.rating?.toFixed(1) || "0.0"}
                     </span>
                   </span>
                   <p>"{review.comment}"</p>
