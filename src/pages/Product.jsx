@@ -100,27 +100,20 @@ const Product = () => {
             <p className="text-3xl text-(--electra-blue)">${product.price}</p>
             <strong className="text-4xl">{product.title}</strong>
             <div className="flex items-center gap-2 text-gray-500">
-              <div className="text-[18px]">
-                <FontAwesomeIcon
-                  className={`${product.rating >= 1 ? "text-orange-400" : "text-gray-500"}`}
-                  icon={faStar}
-                />
-                <FontAwesomeIcon
-                  className={`${product.rating >= 2 ? "text-orange-400" : "text-gray-500"}`}
-                  icon={faStar}
-                />
-                <FontAwesomeIcon
-                  className={`${product.rating >= 3 ? "text-orange-400" : "text-gray-500"}`}
-                  icon={faStar}
-                />
-                <FontAwesomeIcon
-                  className={`${product.rating >= 4 ? "text-orange-400" : "text-gray-500"}`}
-                  icon={faStar}
-                />
-                <FontAwesomeIcon
-                  className={`${product.rating >= 5 ? "text-orange-400" : "text-gray-500"}`}
-                  icon={faStar}
-                />
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <FontAwesomeIcon
+                    key={i}
+                    icon={faStar}
+                    className={
+                      product.rating >= i ? "text-orange-400" : "text-gray-300"
+                    }
+                  />
+                ))}
+
+                <span className="text-xs text-gray-500 ml-1">
+                  {product.rating?.toFixed(1) || "0.0"}
+                </span>
               </div>
               |
               <p className="items-center text-[18px] text-gray-500">
@@ -167,18 +160,16 @@ const Product = () => {
 
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((i) => (
-                <FontAwesomeIcon
-                  key={i}
-                  icon={faStar}
-                  className={
-                    product.rating >= i ? "text-orange-400" : "text-gray-300"
-                  }
-                />
+                <button onClick={setFieldValue("rating", i)}>
+                  <FontAwesomeIcon
+                    key={i}
+                    icon={faStar}
+                    className={
+                      product.rating >= i ? "text-orange-400" : "text-gray-300"
+                    }
+                  />
+                </button>
               ))}
-
-              <span className="text-xs text-gray-500 ml-1">
-                {product.rating?.toFixed(1) || "0.0"}
-              </span>
             </div>
           </div>
 

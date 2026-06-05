@@ -13,7 +13,7 @@ const BrandForm = () => {
     (async () => {
       if (id) {
         const res = await api.get(`/brands/${id}`);
-        setBrand(res);
+        setBrand(res.data);
       }
     })();
     window.scrollTo(0, 0);
