@@ -90,6 +90,7 @@ const Profile = () => {
         address: user.address || "",
         phone: user.phoneNumber || "",
         email: user.email || "",
+        profilePic: "",
         currentPassword: "",
         newPassword: "",
       },
