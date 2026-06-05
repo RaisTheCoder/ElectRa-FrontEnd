@@ -15,7 +15,6 @@ const CategoryForm = () => {
         const res = await api.get(`/categories/${id}`);
         setCategory(res.data);
         console.log(res.data);
-        
       }
     })();
     window.scrollTo(0, 0);

@@ -9,6 +9,16 @@ const BrandForm = () => {
 
   const { id } = useParams();
 
+  useEffect(() => {
+    (async () => {
+      if (id) {
+        const res = await api.get(`/brands/${id}`);
+        setBrand(res);
+      }
+    })();
+    window.scrollTo(0, 0);
+  }, [id]);
+
   const {
     values,
     errors,
@@ -19,7 +29,7 @@ const BrandForm = () => {
   } = useFormik({
     initialValues: {
       name: brand?._Name || `Generic Brand`,
-      icon: brand?.icon,
+      icon: brand?.icon || "",
       enabled: brand?.enabled || true,
     },
     enableReinitialize: true,
@@ -48,13 +58,6 @@ const BrandForm = () => {
       console.log(values);
     },
   });
-
-  useEffect(() => {
-    async () => {
-      const res = await api.get(`/brands/${id}`);
-      setBrand(res.data);
-    };
-  }, [id]);
 
   return (
     <article className="bg-gray-100 rounded-lg">
@@ -95,9 +98,11 @@ const BrandForm = () => {
             Save
           </button>
           <button
-            onClick={() => {
-              navi("../categories");
+            onClick={(e) => {
+              e.stopPropagation();
+              navi("../");
             }}
+            type="button"
             className="button"
           >
             Cancel
