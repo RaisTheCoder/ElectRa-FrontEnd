@@ -88,81 +88,95 @@ const Categories = () => {
         </button>
       </div>
 
-      <TailSpin
-        className="flex self-center align-self-center"
-        height={80}
-        width={80}
-        color="#0A9ACF"
-        visible={loading}
-      />
-      <table
-        className={`${loading ? "opacity-0" : "opacity-100"} transition duration-500 table w-full h-fit flex-col border`}
-      >
-        <thead>
-          <tr className="border h-10">
-            <td className="border lg:w-12.5">ID</td>
-            <td className="border">Comment</td>
-            <td className="border">Product ID</td>
-            <td className="border">Rating</td>
-            <td className="border">Commenter</td>
-            <td className="border w-30">Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {Reviews.map((Review) => {
-            return (
-              <tr className="border" key={Review.id}>
-                <td className="border">{Review.id}</td>
-                <td className="border">{Review.comment}</td>
-                <td
-                  onClick={() => {
-                    navi(`/products/${Review.productId}`);
-                  }}
-                  className="border hover:cursor-pointer"
-                >
-                  {Review.productId}
-                </td>
-                <td className="border">
-                  <div className="text-[24px] flex">
-                    <FontAwesomeIcon
-                      className={`${Review.rating >= 1 ? "text-orange-400" : "text-gray-500"}`}
-                      icon={faStar}
-                    />
-                    <FontAwesomeIcon
-                      className={`${Review.rating >= 2 ? "text-orange-400" : "text-gray-500"}`}
-                      icon={faStar}
-                    />
-                    <FontAwesomeIcon
-                      className={`${Review.rating >= 3 ? "text-orange-400" : "text-gray-500"}`}
-                      icon={faStar}
-                    />
-                    <FontAwesomeIcon
-                      className={`${Review.rating >= 4 ? "text-orange-400" : "text-gray-500"}`}
-                      icon={faStar}
-                    />
-                    <FontAwesomeIcon
-                      className={`${Review.rating >= 5 ? "text-orange-400" : "text-gray-500"}`}
-                      icon={faStar}
-                    />
-                  </div>
-                </td>
-                <td className="border">
-                  {Review?.user?.firstName} {Review?.user?.lastName}{" "}
-                  {`(${Review?.user?.userName})`}
-                </td>
-                <td className="p-2 flex flex-col gap-2">
-                  <button
-                    onClick={() => remove(Review.id)}
-                    className="flex justify-between items-center px-1 cursor-pointer hover:bg-gray-300 transition bg-gray-200 rounded-md"
+      {loading && (
+        <div className="flex justify-center py-10">
+          <TailSpin height={60} width={60} color="#0A9ACF" />
+        </div>
+      )}
+
+      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
+        <table className="app-table">
+          <thead>
+            <tr>
+              <td>Product</td>
+              <td>Comment</td>
+              <td>Product</td>
+              <td>Rating</td>
+              <td>Commenter</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {Reviews.map((Review) => {
+              return (
+                <tr key={Review.id}>
+                  <td
+                    onClick={() => {
+                      navi(`/products/${Review.productId}`);
+                    }}
                   >
-                    <FontAwesomeIcon icon={faTrash} /> Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                    <img
+                      className="product-thumb"
+                      src={Review?.product?.thumbnail}
+                      alt={Review?.product?.title}
+                    />
+
+                    <div>
+                      <p className="truncate">{Review?.product?.title}</p>
+                      <p className="text-xs text-gray-400">
+                        By: {Review?.product?.brand?._Name} | ID:{" "}
+                        {Review?.product?.id}
+                      </p>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div>
+                      <p>{Review.comment}</p>
+                      <p className="text-xs text-gray-400">ID: {Review.id}</p>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div className="flex items-center gap-1">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <FontAwesomeIcon
+                          key={i}
+                          icon={faStar}
+                          className={
+                            Review?.rating >= i
+                              ? "text-orange-400"
+                              : "text-gray-300"
+                          }
+                        />
+                      ))}
+
+                      <span className="text-xs text-gray-500 ml-1">
+                        {Review?.rating?.toFixed(1) || "0.0"}
+                      </span>
+                    </div>
+                  </td>
+
+                  <td>
+                    {Review?.user?.firstName} {Review?.user?.lastName}{" "}
+                    {`(${Review?.user?.userName})`}
+                  </td>
+
+                  <td className="actions-cell">
+                    <button
+                      onClick={() => remove(Review.id)}
+                      className="action-btn"
+                    >
+                      <FontAwesomeIcon icon={faTrash} /> Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
       <button
         onClick={() => {
           loadMore();
