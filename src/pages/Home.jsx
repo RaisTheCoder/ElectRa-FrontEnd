@@ -162,7 +162,7 @@ const Home = () => {
                   <div className="p-4 flex flex-col gap-3 flex-1">
                     <div className="space-y-1">
                       <h3 className="text-sm truncate font-semibold line-clamp-2 text-gray-800">
-                        {product.title}
+                        {product?.brand?._Name} {product.title}
                       </h3>
 
                       <span className="text-xs text-gray-500">
