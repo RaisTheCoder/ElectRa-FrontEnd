@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Audio, Oval, TailSpin } from "react-loader-spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,8 @@ const Product = () => {
   const navi = useNavigate();
 
   const { user } = useAuth();
+
+  const [hovered, setHovered] = useState(0);
 
   const { product, loading, item, reviews, setReviews, pushHistory } =
     useProducts();
@@ -160,12 +162,20 @@ const Product = () => {
 
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((i) => (
-                <button onClick={() => setFieldValue("rating", i)}>
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setFieldValue("rating", i)}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(0)}
+                  className="cursor-pointer"
+                >
                   <FontAwesomeIcon
-                    key={i}
                     icon={faStar}
                     className={
-                      product.rating >= i ? "text-orange-400" : "text-gray-300"
+                      (hovered || values.rating) >= i
+                        ? "text-orange-400"
+                        : "text-gray-300"
                     }
                   />
                 </button>
