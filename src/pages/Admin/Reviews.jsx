@@ -100,7 +100,6 @@ const Categories = () => {
             <tr>
               <td>Product</td>
               <td>Comment</td>
-              <td>Product</td>
               <td>Rating</td>
               <td>Commenter</td>
               <td>Actions</td>
@@ -157,9 +156,22 @@ const Categories = () => {
                     </div>
                   </td>
 
-                  <td>
-                    {Review?.user?.firstName} {Review?.user?.lastName}{" "}
-                    {`(${Review?.user?.userName})`}
+                  <td className="user-cell">
+                    <img
+                      src={
+                        Review?.user?.profilePic || "/placeholder-avatar.jpg"
+                      }
+                      className="h-8 w-8 rounded-full object-cover"
+                    />
+
+                    <div>
+                      <p>
+                        {Review?.user?.firstName} {Review?.user?.lastName}
+                      </p>
+                      <p className="text-xs text-gray-400">
+                        @{Review?.user?.userName} | ID: {Review?.user?.id}
+                      </p>
+                    </div>
                   </td>
 
                   <td className="actions-cell">
