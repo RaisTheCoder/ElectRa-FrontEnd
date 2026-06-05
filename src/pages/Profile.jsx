@@ -19,6 +19,7 @@ const Profile = () => {
   const [showDelete, setShowDelete] = useState(false);
 
   const navi = useNavigate();
+  const [initialized, setInitialized] = useState(false);
 
   const OrderStatus = [
     "Pending",
@@ -27,8 +28,6 @@ const Profile = () => {
     "Delivered",
     "Cancelled",
   ];
-
-  const [profileFile, setProfileFile] = useState(null);
 
   const { values, handleChange, handleSubmit, setFieldValue, resetForm } =
     useFormik({
@@ -39,6 +38,7 @@ const Profile = () => {
         address: user?.address || "",
         phone: user?.phoneNumber || "",
         email: user?.email || "",
+        profilePic: "",
         currentPassword: "",
         newPassword: "",
       },
@@ -54,8 +54,8 @@ const Profile = () => {
         formData.append("phoneNumber", values.phone);
         formData.append("email", values.email);
 
-        if (profileFile) {
-          formData.append("formFile", profileFile);
+        if (values.profilePic instanceof File) {
+          formData.append("formFile", values.profilePic);
         }
 
         if (values.currentPassword && values.newPassword) {
@@ -77,23 +77,26 @@ const Profile = () => {
 
   useEffect(() => {
     fetchUser();
+  }, []);
 
-    if (user) {
-      resetForm({
-        values: {
-          firstName: user?.firstName || "",
-          lastName: user?.lastName || "",
-          username: user?.username || "",
-          address: user?.address || "",
-          phone: user?.phoneNumber || "",
-          email: user?.email || "",
-          profilePic: "",
-          currentPassword: "",
-          newPassword: "",
-        },
-      });
-    }
-  }, [user, resetForm]);
+  useEffect(() => {
+    if (!user || initialized) return;
+
+    resetForm({
+      values: {
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        username: user.username || "",
+        address: user.address || "",
+        phone: user.phoneNumber || "",
+        email: user.email || "",
+        currentPassword: "",
+        newPassword: "",
+      },
+    });
+
+    setInitialized(true);
+  }, [user]);
 
   const countRecentVisits = (history) => {
     const cutoff = Date.now() - 86400000;
@@ -128,12 +131,11 @@ const Profile = () => {
             <div className="relative">
               <img
                 src={
-                  profileFile
-                    ? URL.createObjectURL(profileFile)
+                  values.profilePic
+                    ? URL.createObjectURL(values.profilePic)
                     : user?.profilePic || "/placeholder-avatar.jpg"
                 }
-                className="w-28 h-28 rounded-full object-cover "
-                alt="profile"
+                className="w-28 h-28 rounded-full object-cover"
               />
 
               {editMode && (
@@ -141,9 +143,12 @@ const Profile = () => {
                   type="file"
                   className="absolute inset-0 opacity-0 cursor-pointer"
                   onChange={(e) => {
-                    Math.round(e.target.files[0].size / 1024) >= 2048
-                      ? null
-                      : setProfileFile(e.currentTarget.files[0]);
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+
+                    if (file.size / 1024 < 2048) {
+                      setFieldValue("profilePic", file);
+                    }
                   }}
                 />
               )}
