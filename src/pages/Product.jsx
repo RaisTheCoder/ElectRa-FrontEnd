@@ -160,7 +160,7 @@ const Product = () => {
 
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((i) => (
-                <button onClick={setFieldValue("rating", i)}>
+                <button onClick={() => setFieldValue("rating", i)}>
                   <FontAwesomeIcon
                     key={i}
                     icon={faStar}
