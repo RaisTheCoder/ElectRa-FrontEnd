@@ -230,7 +230,12 @@ const Products = () => {
                   <div>
                     <h3 className="text-sm line-clamp-2">
                       <span className="font-bold">{product?.brand?._Name}</span>{" "}
-                      {product.title}
+                      <span
+                        className={`${product.stock <= 30 && "text-red-400"}`}
+                      >
+                        {product.title}{" "}
+                        {product.stock <= 30 && `(${product.stock})`}
+                      </span>
                     </h3>
                     <span className="text-xs text-muted">
                       {product.subCategory?._Name}
