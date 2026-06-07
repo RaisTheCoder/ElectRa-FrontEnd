@@ -30,7 +30,7 @@ const ThemeDropdown = () => {
       </button>
 
       {open && (
-        <div className="absolute left-0 lg:left-0 -top-3 mt-2 w-40 bg-surface border border-border rounded-xl shadow-lg overflow-hidden text-sm">
+        <div className="absolute left-0 lg:left-0 -top-12 mt-2 w-40 bg-surface border border-border rounded-xl shadow-lg overflow-hidden text-sm">
           <button
             onClick={() => {
               setTheme("light");
