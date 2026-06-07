@@ -120,14 +120,12 @@ const Profile = () => {
   };
 
   return (
-    <section className="min-h-screen py-10 px-5 bg-gray-50">
+    <section className="min-h-screen py-10 px-5">
       <Helmet>
-        <title>
-          {user?.firstName} {user?.lastName} - ElectRa
-        </title>
+        <title>{`${user?.firstName + " " + user?.lastName} - ElectRa`}</title>
       </Helmet>
       <div className="container mx-auto flex flex-col gap-8">
-        <div className="bg-gray-200 shadow-sm rounded-2xl p-6">
+        <div className="bg-surface-2 shadow-sm rounded-2xl p-6">
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="relative">
               <img
@@ -162,9 +160,9 @@ const Profile = () => {
                     {user?.firstName} {user?.lastName}
                   </h2>
 
-                  <p className="text-gray-500">@{user?.username}</p>
+                  <p className="text-muted">@{user?.username}</p>
 
-                  <p className="text-sm text-gray-600 mt-2">
+                  <p className="text-sm text-muted opacity-70 mt-2">
                     {user?.address || "No address added"}
                   </p>
                 </>
@@ -286,25 +284,25 @@ const Profile = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-gray-200 rounded-2xl p-5">
-            <p className="text-gray-500 text-sm">Orders</p>
+          <div className="bg-surface-2 rounded-2xl p-5">
+            <p className="text-muted text-sm">Orders</p>
             <h3 className="text-2xl font-bold">{user?.orders?.length || 0}</h3>
           </div>
 
-          <div className="bg-gray-200 rounded-2xl p-5">
-            <p className="text-gray-500 text-sm">Recently Viewed</p>
+          <div className="bg-surface-2 rounded-2xl p-5">
+            <p className="text-muted text-sm">Recently Viewed</p>
             <h3 className="text-2xl font-bold">
               {countRecentVisits(user?.history)}
             </h3>
           </div>
         </div>
 
-        <div className="bg-gray-200 rounded-2xl p-6 flex flex-col gap-5">
+        <div className="bg-surface-2 rounded-2xl p-6 flex flex-col gap-5">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-bold">Recently Viewed</h3>
 
             <button
-              className="text-sm text-gray-500 hover:text-black"
+              className="text-sm text-muted hover:text-black"
               onClick={async () => {
                 await api.delete("/history/clear");
                 fetchUser();
@@ -319,14 +317,13 @@ const Profile = () => {
               user.history.map((item) => (
                 <div
                   key={item.id}
-                  className="relative min-w-[160px] bg-gray-50  rounded-xl p-3 hover:bg-gray-100 transition cursor-pointer"
+                  className="group relative min-w-[160px] bg-surface  rounded-xl p-3 hover:opacity-80 transition cursor-pointer"
                   onClick={() => navi(`/products/${item?.product?.id}`)}
                 >
-                  <div className="h-24 bg-white rounded-lg overflow-hidden flex items-center justify-center">
+                  <div className="h-25 bg-white rounded-lg overflow-hidden flex items-center justify-center">
                     <img
                       src={item?.product?.thumbnail}
-                      className="h-full object-contain"
-                      alt=""
+                      className="h-full object-contain group-hover:scale-105 transition"
                     />
                   </div>
 
@@ -339,7 +336,7 @@ const Profile = () => {
                   </p>
 
                   <button
-                    className="absolute top-1 right-1 text-gray-400 hover:text-black"
+                    className="button min-w-10 opacity-100 absolute top-1 right-1 text-muted hover:text-black"
                     onClick={async (e) => {
                       e.stopPropagation();
                       await api.delete(`/history/${item.id}`);
@@ -351,12 +348,12 @@ const Profile = () => {
                 </div>
               ))
             ) : (
-              <h3 className="text-gray-500">No history yet.</h3>
+              <h3 className="text-muted">No history yet.</h3>
             )}
           </div>
         </div>
 
-        <div className="bg-gray-200 rounded-2xl p-6 flex flex-col gap-5">
+        <div className="bg-surface-2 rounded-2xl p-6 flex flex-col gap-5">
           <h3 className="text-xl font-bold">Order History</h3>
 
           <div className="flex flex-col gap-4">
@@ -364,13 +361,13 @@ const Profile = () => {
               user.orders.map((order) => (
                 <div
                   key={order.id}
-                  className=" rounded-xl p-4 hover:bg-gray-100 bg-gray-50 hover:cursor-pointer transition"
+                  className=" rounded-xl p-4 hover:opacity-80 bg-surface hover:cursor-pointer transition"
                   onClick={() => navi(`orders/${order.id}`)}
                 >
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="font-bold">Order #{order.id}</p>
-                      <p className="text-sm text-gray-500">{order.date}</p>
+                      <p className="text-sm text-muted">{order.date}</p>
                     </div>
 
                     <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">
@@ -378,13 +375,15 @@ const Profile = () => {
                     </span>
                   </div>
 
-                  <div className="mt-3 text-sm text-gray-600">
-                    {order?.items.length} items · ${order.totalPrice}
+                  <div className="mt-3 opacity-70 text-sm text-muted">
+                    {order?.items.length}{" "}
+                    {order?.items.length > 1 ? "items" : "item"} · $
+                    {order.totalPrice}
                   </div>
                 </div>
               ))
             ) : (
-              <h3 className="text-gray-500">No orders yet.</h3>
+              <h3 className="text-muted">No orders yet.</h3>
             )}
           </div>
         </div>

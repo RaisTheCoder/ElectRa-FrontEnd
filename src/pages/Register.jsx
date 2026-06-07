@@ -34,11 +34,11 @@ const Register = () => {
   });
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <section className="min-h-screen flex items-center justify-center px-4">
       <Helmet>
         <title>Sign Up - ElectRa</title>
       </Helmet>
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
+      <div className="w-full max-w-md bg-surface rounded-2xl shadow-lg p-8 space-y-6">
         <div className="text-center space-y-1">
           <h3 className="text-2xl font-bold">Register</h3>
           <p className="text-sm text-gray-500">Create your account</p>
@@ -47,7 +47,7 @@ const Register = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <input
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
               value={values.firstName}
               onChange={handleChange}
               type="text"
@@ -56,7 +56,7 @@ const Register = () => {
             />
 
             <input
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
               value={values.lastName}
               onChange={handleChange}
               type="text"
@@ -68,7 +68,7 @@ const Register = () => {
           <span className="text-red-500">{errors.lastName}</span>
 
           <input
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
             value={values.username}
             onChange={handleChange}
             type="text"
@@ -78,7 +78,7 @@ const Register = () => {
           <span className="text-red-500">{errors.username}</span>
 
           <input
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
             value={values.email}
             onChange={handleChange}
             type="email"
@@ -88,7 +88,7 @@ const Register = () => {
           <span className="text-red-500">{errors.email}</span>
 
           <input
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
             value={values.phone}
             onChange={handleChange}
             type="text"
@@ -98,7 +98,7 @@ const Register = () => {
           <span className="text-red-500">{errors.phone}</span>
 
           <input
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
             value={values.password}
             onChange={handleChange}
             type="password"
@@ -108,7 +108,7 @@ const Register = () => {
           <span className="text-red-500">{errors.password}</span>
 
           <input
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 ring-primary"
             value={values.confirmPassword}
             onChange={handleChange}
             type="password"
@@ -117,7 +117,7 @@ const Register = () => {
           />
           <span className="text-red-500">{errors.confirmPassword}</span>
 
-          <div className="space-y-3 text-sm text-gray-600">
+          <div className="space-y-3 text-sm text-muted">
             <label className="flex gap-2 items-start">
               <input
                 type="checkbox"
@@ -127,7 +127,7 @@ const Register = () => {
               />
               <span>
                 I agree to the{" "}
-                <Link className="text-(--electra-blue)" to="/terms">
+                <Link className="text-primary" to="/terms">
                   terms of service
                 </Link>
               </span>
@@ -143,7 +143,7 @@ const Register = () => {
             type="submit"
             disabled={!tos}
             className={`w-full p-3 rounded-lg transition text-white
-          ${tos ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-300 cursor-not-allowed"}`}
+          ${tos ? "bg-primary hover:bg-primary-hover" : "bg-gray-300 cursor-not-allowed"}`}
           >
             Register
           </button>
@@ -151,7 +151,7 @@ const Register = () => {
 
         <div className="text-center text-sm text-gray-500">
           Already have an account?
-          <Link to="/login" className="text-blue-600 ml-1 hover:underline">
+          <Link to="/login" className="text-primary ml-1 hover:underline">
             Log in
           </Link>
         </div>

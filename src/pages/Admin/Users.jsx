@@ -75,25 +75,21 @@ const Users = () => {
             e.key == "Enter" ? setSearch(input.current.value) : null
           }
           placeholder="Search users..."
-          className="w-full bg-gray-200 rounded-lg h-10 px-3"
+          className="w-full bg-surface-2 rounded-lg h-10 px-3"
         />
 
         <button
-          className="px-3 bg-gray-200 rounded-lg"
+          className="px-3 bg-surface-2 rounded-lg"
           onClick={() => setSearch(input.current.value)}
         >
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
 
-      {loading && (
-        <div className="flex justify-center py-10">
-          <TailSpin height={60} width={60} color="#0A9ACF" />
-        </div>
-      )}
-
-      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
-        <table className="app-table">
+      <div className="overflow-x-auto rounded-xl">
+        <table
+          className="app-table transition-opacity duration-500 w-full table-fixed"
+        >
           <thead>
             <tr>
               <th>User</th>
@@ -169,6 +165,12 @@ const Users = () => {
           </tbody>
         </table>
       </div>
+
+      {loading && (
+        <div className="flex justify-center py-10">
+          <TailSpin height={60} width={60} color="#0A9ACF" />
+        </div>
+      )}
 
       {users.length >= limit && (
         <button

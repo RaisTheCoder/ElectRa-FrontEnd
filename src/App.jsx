@@ -42,121 +42,124 @@ import AdminRoute from "./pages/Admin/AdminRoute";
 import Checkout from "./pages/Checkout";
 import OrderForm from "./pages/Admin/AddForm/OrderForm";
 import OrderDetails from "./pages/OrderDetails";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const App = () => {
   return (
     <GoogleOAuthProvider clientId="1058825506209-j19iu52b1e03h694ogv30af2cmvjv1hu.apps.googleusercontent.com">
-      <AuthProvider>
-        <CartProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route path="*" element={<NotFound />} />
-                <Route
-                  index
-                  element={
-                    <ProductProvider>
-                      <Home />
-                    </ProductProvider>
-                  }
-                />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/products">
+      <ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route path="*" element={<NotFound />} />
                   <Route
                     index
                     element={
                       <ProductProvider>
-                        <Products />
+                        <Home />
                       </ProductProvider>
                     }
                   />
-                  <Route
-                    path=":id"
-                    element={
-                      <ProductProvider>
-                        <Product />
-                      </ProductProvider>
-                    }
-                  />
-                  <Route
-                    path="by/:category"
-                    element={
-                      <ProductProvider>
-                        <Products />
-                      </ProductProvider>
-                    }
-                  />
-                  <Route
-                    path="by/:category/:subCategory"
-                    element={
-                      <ProductProvider>
-                        <Products />
-                      </ProductProvider>
-                    }
-                  />
-                </Route>
-                <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/terms" element={<Terms />} />
-
-                {/* Me */}
-                <Route path="/me" element={<Profile />}>
-                  {/* <Route path="orders" element={<Orders />} /> */}
-                </Route>
-
-                <Route path="/me/orders/:id" element={<OrderDetails />} />
-
-                <Route path="cart" element={<Cart />} />
-                <Route path="checkout" element={<Checkout />} />
-
-                {/* Admin */}
-                <Route element={<AdminRoute />}>
-                  <Route path="/admin" element={<Admin />}>
-                    <Route index element={<Dashboard />} />
+                  <Route path="/categories" element={<Categories />} />
+                  <Route path="/products">
                     <Route
-                      path="products"
+                      index
                       element={
                         <ProductProvider>
-                          <ProductsAdmin />
+                          <Products />
                         </ProductProvider>
                       }
                     />
-                    <Route path="users" element={<UsersAdmin />} />
-                    <Route path="brands" element={<BrandsAdmin />} />
-                    <Route path="reviews" element={<ReviewsAdmin />} />
-                    <Route path="categories" element={<CategoriesAdmin />} />
                     <Route
-                      path="subcategories"
-                      element={<SubCategoriesAdmin />}
+                      path=":id"
+                      element={
+                        <ProductProvider>
+                          <Product />
+                        </ProductProvider>
+                      }
                     />
-                    <Route path="orders" element={<OrdersAdmin />} />
+                    <Route
+                      path="by/:category"
+                      element={
+                        <ProductProvider>
+                          <Products />
+                        </ProductProvider>
+                      }
+                    />
+                    <Route
+                      path="by/:category/:subCategory"
+                      element={
+                        <ProductProvider>
+                          <Products />
+                        </ProductProvider>
+                      }
+                    />
+                  </Route>
+                  <Route path="/about" element={<About />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/terms" element={<Terms />} />
 
-                    {/* Add forms */}
-                    <Route path="products/add" element={<ProductForm />} />
-                    <Route path="categories/add" element={<CategoryForm />} />
-                    <Route
-                      path="subcategories/add"
-                      element={<SubCategoryForm />}
-                    />
-                    <Route path="brands/add" element={<BrandForm />} />
+                  {/* Me */}
+                  <Route path="/me" element={<Profile />}>
+                    {/* <Route path="orders" element={<Orders />} /> */}
+                  </Route>
 
-                    {/* Details */}
-                    <Route path="products/:id" element={<ProductForm />} />
-                    <Route path="categories/:id" element={<CategoryForm />} />
-                    <Route
-                      path="subcategories/:id"
-                      element={<SubCategoryForm />}
-                    />
-                    <Route path="brands/:id" element={<BrandForm />} />
-                    <Route path="orders/:id" element={<OrderForm />} />
+                  <Route path="/me/orders/:id" element={<OrderDetails />} />
+
+                  <Route path="cart" element={<Cart />} />
+                  <Route path="checkout" element={<Checkout />} />
+
+                  {/* Admin */}
+                  <Route element={<AdminRoute />}>
+                    <Route path="/admin" element={<Admin />}>
+                      <Route index element={<Dashboard />} />
+                      <Route
+                        path="products"
+                        element={
+                          <ProductProvider>
+                            <ProductsAdmin />
+                          </ProductProvider>
+                        }
+                      />
+                      <Route path="users" element={<UsersAdmin />} />
+                      <Route path="brands" element={<BrandsAdmin />} />
+                      <Route path="reviews" element={<ReviewsAdmin />} />
+                      <Route path="categories" element={<CategoriesAdmin />} />
+                      <Route
+                        path="subcategories"
+                        element={<SubCategoriesAdmin />}
+                      />
+                      <Route path="orders" element={<OrdersAdmin />} />
+
+                      {/* Add forms */}
+                      <Route path="products/add" element={<ProductForm />} />
+                      <Route path="categories/add" element={<CategoryForm />} />
+                      <Route
+                        path="subcategories/add"
+                        element={<SubCategoryForm />}
+                      />
+                      <Route path="brands/add" element={<BrandForm />} />
+
+                      {/* Details */}
+                      <Route path="products/:id" element={<ProductForm />} />
+                      <Route path="categories/:id" element={<CategoryForm />} />
+                      <Route
+                        path="subcategories/:id"
+                        element={<SubCategoryForm />}
+                      />
+                      <Route path="brands/:id" element={<BrandForm />} />
+                      <Route path="orders/:id" element={<OrderForm />} />
+                    </Route>
                   </Route>
                 </Route>
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </CartProvider>
-      </AuthProvider>
+              </Routes>
+            </BrowserRouter>
+          </CartProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </GoogleOAuthProvider>
   );
 };

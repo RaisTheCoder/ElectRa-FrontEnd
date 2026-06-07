@@ -41,7 +41,7 @@ const OrderDetails = () => {
   return (
     <section className="flex relative min-h-screen py-10 px-5 justify-center">
       <Helmet>
-        <title>Order #{order.id} - ElectRa</title>
+        <title>{`Order #${order.id} - ElectRa`}</title>
       </Helmet>
       <div className="container relative max-w-6xl flex flex-col gap-5">
         <button
@@ -53,7 +53,7 @@ const OrderDetails = () => {
           <FontAwesomeIcon icon={faArrowLeft} /> Go Back
         </button>
 
-        <div className="bg-gray-100 rounded-xl p-5 space-y-2">
+        <div className="bg-surface rounded-xl p-5 space-y-2">
           <div className="flex justify-between items-center">
             <h1 className="text-xl font-bold">Order #{order.id}</h1>
 
@@ -67,50 +67,56 @@ const OrderDetails = () => {
           </p>
 
           <p className="text-sm">
-            <span className="text-gray-500">Total:</span>{" "}
+            <span className="text-muted">Total:</span>{" "}
             <span className="font-bold text-[#0A9ACF]">
               ${order.totalPrice.toFixed(2)}
             </span>
           </p>
         </div>
 
-        <div className="bg-gray-100 rounded-xl p-5 space-y-3">
+        <div className="bg-surface rounded-xl p-5 space-y-3">
           <h2 className="font-semibold">Delivery Details</h2>
 
           <p className="text-sm">
-            <span className="text-gray-500">Address:</span> {order.address}
+            <span className="text-muted">Address:</span> {order.address}
           </p>
 
           <p className="text-sm">
-            <span className="text-gray-500">Phone:</span> {order.phone || "-"}
+            <span className="text-muted">Phone:</span> {order.phone || "-"}
           </p>
 
           {order.trackingNumber && (
             <p className="text-sm">
-              <span className="text-gray-500">Tracking:</span>{" "}
+              <span className="text-muted">Tracking:</span>{" "}
               {order.trackingNumber}
             </p>
           )}
         </div>
 
         {order.note && (
-          <div className="bg-yellow-50 rounded-xl p-5">
+          <div className="bg-amber-50 dark:bg-[#fef3c640] rounded-xl p-5">
             <h2 className="font-semibold mb-2">Your Note</h2>
-            <p className="text-sm text-gray-700">{order.note}</p>
+            <p className="text-sm text-muted">{order.note}</p>
           </div>
         )}
 
-        <div className="bg-gray-100 rounded-xl p-5">
+        <div className="bg-surface rounded-xl p-5">
           <h2 className="font-semibold mb-3">Items</h2>
 
           <div className="space-y-3">
             {order.items.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between items-center border-b pb-2"
+                className="flex justify-between items-center border-b pb-2 hover:cursor-pointer"
+                onClick={() => navi(`/products/${item.id}`)}
               >
                 <div>
-                  <p className="font-medium">{item.title}</p>
+                  <p className="font-medium">
+                    <span className="font-bold">
+                      {item?.product?.brand?._Name}
+                    </span>{" "}
+                    {item.title}
+                  </p>
                   <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
                 </div>
 

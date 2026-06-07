@@ -89,7 +89,7 @@ const ProductForm = () => {
   }, [id]);
 
   return (
-    <article className="bg-gray-100 rounded-lg">
+    <article className="bg-surface rounded-lg">
       <form onSubmit={handleSubmit} className="formStyle">
         <div className="formGroup">
           <label htmlFor="Title">Title</label>

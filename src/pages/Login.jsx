@@ -34,11 +34,11 @@ const Login = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <section className="min-h-screen flex items-center justify-center px-4">
       <Helmet>
         <title>Sign In - ElectRa</title>
       </Helmet>
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
+      <div className="w-full max-w-md bg-surface rounded-2xl shadow-lg p-8 space-y-6">
         <div className="text-center space-y-1">
           <h3 className="text-2xl font-bold">Welcome back</h3>
           <p className="text-sm text-gray-500">Log in to continue</p>
@@ -47,7 +47,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <input
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
               value={values.username}
               onChange={handleChange}
               type="text"
@@ -61,7 +61,7 @@ const Login = () => {
 
           <div className="space-y-2">
             <input
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
               value={values.password}
               onChange={handleChange}
               type="password"
@@ -93,10 +93,7 @@ const Login = () => {
 
         <div className="text-center text-sm text-gray-500">
           Don’t have an account?
-          <Link
-            to="/register"
-            className="text-(--electra-blue) ml-1 hover:underline"
-          >
+          <Link to="/register" className="text-primary ml-1 hover:underline">
             Create one
           </Link>
         </div>

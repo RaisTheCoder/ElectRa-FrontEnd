@@ -1,111 +1,130 @@
-import {
-  faBasketShopping,
-  faCoins,
-  faHandshake,
-  faList,
-} from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect } from "react";
-import { Link } from "react-router";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBolt,
+  faDatabase,
+  faServer,
+  faCartShopping,
+  faFilter,
+  faCode,
+} from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
+import { faReact, faTailwindCss } from "@fortawesome/free-brands-svg-icons";
 
 const About = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const navi = useNavigate();
 
   return (
-    <section className="min-h-screen">
+    <section className="min-h-screen bg-surface text-fg flex flex-col gap-15 py-15 px-5 lg:container mx-auto">
       <Helmet>
-        <title>About Us - ElectRa</title>
+        <title>About - ElectRa</title>
       </Helmet>
-      <section
-        id="hero"
-        className="flex h-[50vh] justify-center items-center"
-        style={{
-          backgroundImage:
-            "url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP._Klkyn9lKs4MyvVf1xuGowHaEJ%3Fpid%3DApi&f=1&ipt=5e0430bb221d7938eac1178a8da1c879ec7af17630ee906c1da705296a9bd9a8&ipo=images)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
-        <article className="text-white flex flex-col gap-8 text-center w-full h-full items-center justify-center backdrop-blur-sm">
-          <div className="title">
-            <h1 className="font-bold text-5xl">Welcome to ElectRa</h1>
-          </div>
-          <div className="content flex flex-col items-center">
-            <p className="w-90 md:w-120">
-              ElectRa is a mockery Electronics Store web project to demonstrate
-              my skills while showcasing how would I make electronics store
-              industry better.
-            </p>
-          </div>
-          <div className="buttons">
-            <Link
-              to={"/products"}
-              className="p-5 py-4 bg-[#0A99CF] hover:bg-[#0887b5] transition rounded-lg text-white"
-            >
-              See Products
-            </Link>
-          </div>
-        </article>
-      </section>
-      <section className="flex h-full gap-10 flex-col justify-center items-center py-15 bg-gray-100">
-        <aside className="text-center items-center flex flex-col gap-2">
-          <h2 className="text-2xl font-bold">
-            Revolutionizing Electronics Shopping
-          </h2>
-          <p className="w-90">
-            Explore thousands of electronic appliances, components, and hardware
-            from hundreds of trusted brands, all in one place.
+
+      <header className="text-center flex flex-col gap-4">
+        <h1 className="text-4xl md:text-5xl font-bold">ElectRa</h1>
+        <p className="text-muted max-w-2xl mx-auto">
+          A modern electronics store concept built to demonstrate full-stack
+          development skills, clean UI design, and real-world e-commerce logic.
+        </p>
+
+        <button
+          onClick={() => navi("/products")}
+          className="self-center mt-4 px-5 py-2 rounded-lg bg-primary text-white hover:opacity-90 transition"
+        >
+          Explore Products
+        </button>
+      </header>
+
+      <section className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl font-bold">What is ElectRa?</h2>
+          <p className="text-muted leading-relaxed">
+            ElectRa is a simulated e-commerce platform focused on electronics.
+            It includes product browsing, filtering, cart management, reviews,
+            and user authentication. The goal is to replicate a real-world
+            online store experience with modern UI and scalable architecture.
           </p>
-        </aside>
 
-        <article className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faHandshake} />
-              <strong>Reliable Prices</strong>
+          <p className="text-muted leading-relaxed">
+            It’s not just a UI project, it includes real API integration, state
+            management, and dynamic data handling. I tried my best :3 enjoy.
+          </p>
+        </div>
+
+        <div className="bg-surface-2 border border-border rounded-xl p-6 flex flex-col gap-4">
+          <h3 className="text-xl font-semibold">Core Features</h3>
+
+          <div className="flex flex-col gap-3 text-sm text-muted">
+            <div className="flex items-center gap-2">
+              <FontAwesomeIcon icon={faCartShopping} />
+              Shopping cart with quantity management
             </div>
-            <p className="text-[14px]">
-              No more overpaying for retail markups. Get fair, transparent
-              pricing you can trust.
-            </p>
+            <div className="flex items-center gap-2">
+              <FontAwesomeIcon icon={faFilter} />
+              Advanced product filtering & search
+            </div>
+            <div className="flex items-center gap-2">
+              <FontAwesomeIcon icon={faBolt} />
+              Fast product browsing experience
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <h2 className="text-2xl font-bold text-center">Tech Stack</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
+          <div className="bg-surface-2 border border-border rounded-xl p-4 text-center">
+            <FontAwesomeIcon icon={faReact} className="text-primary text-xl" />
+            <p className="mt-2">React + Vite</p>
           </div>
 
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faBasketShopping} />
-              <strong>Easy access</strong>
-            </div>
-            <p className="text-[14px]">
-              Products you used to hunt for on foreign e-commerce platforms are
-              now available locally. No customs stress, no long waits.
-            </p>
+          <div className="bg-surface-2 border border-border rounded-xl p-4 text-center">
+            <FontAwesomeIcon
+              icon={faTailwindCss}
+              className="text-primary text-xl"
+            />
+            <p className="mt-2">Tailwind CSS</p>
           </div>
 
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faList} />
-              <strong>Wide Selection</strong>
-            </div>
-            <p className="text-[14px]">
-              From everyday electronics to rare components. Find exactly what
-              you need without endless searching.
-            </p>
+          <div className="bg-surface-2 border border-border rounded-xl p-4 text-center">
+            <FontAwesomeIcon icon={faServer} className="text-primary text-xl" />
+            <p className="mt-2">ASP .NET Core API</p>
           </div>
 
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faCoins} />
-              <strong>Gamified Shopping</strong>
-            </div>
-            <p className="text-[14px]">
-              Get bonuses, promotions and rewards for every product you get for
-              your needs.
-            </p>
+          <div className="bg-surface-2 border border-border rounded-xl p-4 text-center">
+            <FontAwesomeIcon
+              icon={faDatabase}
+              className="text-primary text-xl"
+            />
+            <p className="mt-2">MSSQL</p>
           </div>
-        </article>
+
+          <div className="bg-surface-2 border border-border rounded-xl p-4 text-center">
+            <FontAwesomeIcon icon={faCode} className="text-primary text-xl" />
+            <p className="mt-2">MS VSCode + JetBrains Rider</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-surface-2 border border-border rounded-xl p-8 flex flex-col gap-4 text-center">
+        <h2 className="text-2xl font-bold">Why this project exists</h2>
+        <p className="text-muted max-w-3xl mx-auto">
+          ElectRa was built to simulate a real e-commerce platform, focusing on
+          real-world features like authentication, product management, cart
+          logic, filtering systems, and responsive UI design. It was merely a
+          project I've scrapped, later used as an idea where I was required to
+          create a final project at the Full-Stack course provided by{" "}
+          <a
+            className="text-purple-400 hover:underline"
+            href="https://ellinmmc.az"
+            target="_blank"
+          >
+            EllinMMC
+          </a>
+        </p>
       </section>
     </section>
   );

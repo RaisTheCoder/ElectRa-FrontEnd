@@ -23,7 +23,7 @@ const Cart = () => {
               validatedCart.map((item) => (
                 <div
                   key={item.productId}
-                  className="hover:border-[#0A9ACF] border-transparent border bg-gray-100 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 cursor-pointer hover:bg-gray-200 transition"
+                  className="hover:border-primary border-transparent border bg-surface-2 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 cursor-pointer hover:bg-surface transition"
                   onClick={() => navi(`/products/${item.productId}`)}
                 >
                   <div className="flex items-center gap-4 sm:gap-5">
@@ -36,6 +36,7 @@ const Cart = () => {
                     </div>
 
                     <h5 className="font-medium text-sm sm:text-base line-clamp-2">
+                      <span className="font-bold">{item?.brand?._Name}</span>{" "}
                       {item.title}
                     </h5>
                   </div>
@@ -92,15 +93,15 @@ const Cart = () => {
             className="
             fixed bottom-0 left-0 right-0
             lg:sticky lg:top-10 lg:w-80
-            bg-gray-200 p-5 z-50
+            bg-surface-2 p-5 z-50
             lg:rounded-xl
           "
           >
             <p className="font-bold">Total Price: ${totalPrice.toFixed(2)}</p>
 
-            <hr className="my-3 text-gray-400" />
+            <hr className="my-3 text-muted" />
 
-            <span className="text-gray-500 text-sm">
+            <span className="text-muted text-sm">
               No Discounts Applied - Free Delivery
             </span>
 

@@ -72,7 +72,7 @@ const Categories = () => {
       <div className="flex gap-5">
         <input
           type="text"
-          className="w-full bg-gray-200 rounded-lg h-10 p-5"
+          className="w-full bg-surface-2 rounded-lg h-10 p-5"
           placeholder="Search..."
           ref={search}
           onClick={() => focusInput()}
@@ -81,11 +81,99 @@ const Categories = () => {
           }}
         />
         <button
-          className="p-2 px-3 rounded-lg cursor-pointer bg-gray-200"
+          className="p-2 px-3 rounded-lg cursor-pointer bg-surface-2"
           onClick={() => filterReviews()}
         >
           <FontAwesomeIcon icon={faSearch} />
         </button>
+      </div>
+
+      <div className="overflow-x-auto rounded-xl">
+        <table className="app-table transition-opacity duration-500 w-full table-fixed">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Comment</th>
+              <th>Rating</th>
+              <th>Commenter</th>
+              <th className="actions-cell">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Reviews.map((review) => (
+              <tr key={review.id}>
+                <td
+                  className="cursor-pointer"
+                  onClick={() => navi(`/products/${review.productId}`)}
+                >
+                  <div className="flex items-center gap-3">
+                    <img
+                      className="product-thumb"
+                      src={review?.product?.thumbnail}
+                      alt={review?.product?.title}
+                    />
+
+                    <div>
+                      <p className="truncate">{review?.product?.title}</p>
+                      <p className="text-xs text-muted">
+                        ID: {review?.product?.id}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <p>{review.comment}</p>
+                  <p className="text-xs text-muted">ID: {review.id}</p>
+                </td>
+
+                <td>
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <FontAwesomeIcon
+                        key={i}
+                        icon={faStar}
+                        className={
+                          review?.rating >= i ? "text-orange-400" : "text-muted"
+                        }
+                      />
+                    ))}
+                    <span className="text-xs text-muted ml-1">
+                      {review?.rating?.toFixed(1) || "0.0"}
+                    </span>
+                  </div>
+                </td>
+
+                <td className="user-cell">
+                  <img
+                    src={review?.user?.profilePic || "/placeholder-avatar.jpg"}
+                    className="h-8 w-8 rounded-full object-cover"
+                  />
+
+                  <div>
+                    <p>
+                      {review?.user?.firstName} {review?.user?.lastName}
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      @{review?.user?.userName}
+                    </p>
+                  </div>
+                </td>
+
+                <td className="actions-cell">
+                  <div>
+                    <button
+                      onClick={() => remove(review.id)}
+                      className="action-btn"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {loading && (
@@ -93,101 +181,6 @@ const Categories = () => {
           <TailSpin height={60} width={60} color="#0A9ACF" />
         </div>
       )}
-
-      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
-        <table className="app-table">
-          <thead>
-            <tr>
-              <td>Product</td>
-              <td>Comment</td>
-              <td>Rating</td>
-              <td>Commenter</td>
-              <td>Actions</td>
-            </tr>
-          </thead>
-          <tbody>
-            {Reviews.map((Review) => {
-              return (
-                <tr key={Review.id}>
-                  <td
-                    onClick={() => {
-                      navi(`/products/${Review.productId}`);
-                    }}
-                  >
-                    <img
-                      className="product-thumb"
-                      src={Review?.product?.thumbnail}
-                      alt={Review?.product?.title}
-                    />
-
-                    <div>
-                      <p className="truncate">{Review?.product?.title}</p>
-                      <p className="text-xs text-gray-400">
-                        By: {Review?.product?.brand?._Name} | ID:{" "}
-                        {Review?.product?.id}
-                      </p>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div>
-                      <p>{Review.comment}</p>
-                      <p className="text-xs text-gray-400">ID: {Review.id}</p>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div className="flex items-center gap-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <FontAwesomeIcon
-                          key={i}
-                          icon={faStar}
-                          className={
-                            Review?.rating >= i
-                              ? "text-orange-400"
-                              : "text-gray-300"
-                          }
-                        />
-                      ))}
-
-                      <span className="text-xs text-gray-500 ml-1">
-                        {Review?.rating?.toFixed(1) || "0.0"}
-                      </span>
-                    </div>
-                  </td>
-
-                  <td className="user-cell">
-                    <img
-                      src={
-                        Review?.user?.profilePic || "/placeholder-avatar.jpg"
-                      }
-                      className="h-8 w-8 rounded-full object-cover"
-                    />
-
-                    <div>
-                      <p>
-                        {Review?.user?.firstName} {Review?.user?.lastName}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        @{Review?.user?.userName} | ID: {Review?.user?.id}
-                      </p>
-                    </div>
-                  </td>
-
-                  <td className="actions-cell">
-                    <button
-                      onClick={() => remove(Review.id)}
-                      className="action-btn"
-                    >
-                      <FontAwesomeIcon icon={faTrash} /> Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
 
       <button
         onClick={() => {

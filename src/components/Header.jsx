@@ -4,227 +4,191 @@ import {
   faRightToBracket,
   faShoppingCart,
   faToolbox,
-  faUserCircle,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+import ThemeDropdown from "./ThemeDropdown";
 
 const Header = () => {
-  const [navV, setNavV] = useState(false);
-  const [profileV, setProfileV] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+
   const { user, logout } = useAuth();
-  const { cart, totalItems } = useCart();
+  const { totalItems } = useCart();
   const navi = useNavigate();
 
   return (
-    <header className="z-1050 flex fixed gap-5 justify-between lg:justify-normal px-8 lg:px-15 h-20 w-full bg-[#F0F0F0]">
-      <Link className="flex lg:hidden" to="/">
-        <img
-          className="h-15 w-15 lg:h-20 lg:w-20 self-center"
-          src="/e.png"
-          alt="ElectRa logo"
-        />
-      </Link>
+    <>
+      <header className="fixed top-0 left-0 w-full h-20 z-100 bg-surface border-b border-border text-fg">
+        <div className="container mx-auto h-full px-5 flex items-center justify-between">
+          <Link to="/" className="flex items-center">
+            <img src="/e.png" className="h-8 w-8" />
+            <span className="hidden sm:block font-bold">lectRa</span>
+          </Link>
 
-      <nav className="hidden w-full lg:flex gap-8 items-center justify-between">
-        <ul className="flex gap-8 items-center">
-          <li>
-            <Link to="/">
-              <img className="h-20 w-20" src="/e.png" alt="ElectRa logo" />
-            </Link>
-          </li>
-          <li className="hover:text-gray-700">
+          <nav className="hidden lg:flex items-center gap-8 text-sm">
             <Link to="/">Home</Link>
-          </li>
-          <li className="hover:text-gray-700">
             <Link to="/products">Products</Link>
-          </li>
-          <li className="hover:text-gray-700">
             <Link to="/categories">Categories</Link>
-          </li>
-        </ul>
+          </nav>
 
-        <ul className="flex items-center gap-8">
-          <li className={`${user ? "" : "hidden"} hover:text-gray-700`}>
-            <button>
-              <FontAwesomeIcon icon={faCoins} /> {user?.rewardPoints.toFixed(2)}
-            </button>
-          </li>
-          <li className="hover:text-gray-700">
+          <div className="flex items-center gap-3">
+            {user && (
+              <button className="hidden sm:block text-sm text-muted">
+                <FontAwesomeIcon icon={faCoins} />{" "}
+                {user.rewardPoints?.toFixed(0)}
+              </button>
+            )}
+
             <button
-              className="cursor-pointer relative"
-              onClick={() => {
-                navi("/cart");
-              }}
+              onClick={() => navi("/cart")}
+              className="relative p-2 rounded-lg hover:bg-surface-2"
             >
               <FontAwesomeIcon icon={faShoppingCart} />
-              <span
-                className={`${totalItems == 0 ? "hidden" : "block"} rounded-[50%] h-6 w-6 text-white items-center justify-center bg-red-400 absolute -right-4 -top-4`}
-              >
-                {totalItems}
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 text-[10px] bg-red-500 text-white flex items-center justify-center rounded-full">
+                  {totalItems}
+                </span>
+              )}
             </button>
-          </li>
-          {/* <li className="hover:text-gray-700">
-            <Link to="/about">About Us</Link>
-          </li> */}
-          <li className="hover:text-gray-700">
-            <Link
-              className={`${user ? "hidden" : ""} button primary`}
-              to="/login"
-            >
-              <FontAwesomeIcon icon={faUserCircle} /> Log In
-            </Link>
+
             {user ? (
-              <>
+              <div className="relative hidden lg:block">
                 <button
-                  className={`flex gap-5 items-center relative`}
-                  onClick={() => setProfileV(!profileV)}
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="flex items-center gap-2 p-1 rounded-lg hover:bg-surface-2"
                 >
-                  {user?.firstName} {user?.lastName}
                   <img
-                    className="pfp"
-                    src={user?.profilePic || `/placeholder-avatar.jpg`}
-                    alt={user?.firstName}
+                    src={user?.profilePic}
+                    className="w-8 h-8 rounded-full"
                   />
                 </button>
-                <ul
-                  className={`${profileV ? "opacity-100" : "opacity-0"} transition absolute bg-gray-300 top-24 right-10 p-2 rounded-xl flex flex-col gap-3 text-black`}
-                >
-                  <li
-                    onClick={() => setProfileV(!profileV)}
-                    className="hover:text-gray-500 p-1"
-                  >
-                    <Link to={"/me"}>
-                      <FontAwesomeIcon icon={faUserCircle} /> Profile
-                    </Link>
-                  </li>
-                  {user?.roles?.includes("Admin") ? (
-                    <li
-                      onClick={() => setProfileV(!profileV)}
-                      className="hover:text-gray-500 p-1"
+
+                {profileOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-surface border border-border rounded-xl shadow-lg p-2 flex flex-col text-sm">
+                    <Link
+                      to="/me"
+                      className="p-2 hover:bg-surface-2 rounded-lg"
+                      onClick={() => setProfileOpen(false)}
                     >
-                      <FontAwesomeIcon icon={faToolbox} />{" "}
-                      <Link to={"/admin"}>Admin Panel</Link>
-                    </li>
-                  ) : null}
-                  <hr />
-                  <li
-                    onClick={() => setProfileV(!profileV)}
-                    className="hover:text-gray-500 p-1"
-                  >
+                      {user?.firstName + " " + user?.lastName}
+                    </Link>
+
+                    <ThemeDropdown />
+
+                    {user?.roles?.includes("Admin") && (
+                      <Link
+                        to="/admin"
+                        className="p-2 hover:bg-surface-2 rounded-lg"
+                        onClick={() => setProfileOpen(false)}
+                      >
+                        <FontAwesomeIcon icon={faToolbox} /> Admin
+                      </Link>
+                    )}
+
                     <button
                       onClick={() => {
                         logout();
                         navi("/");
+                        setProfileOpen(false);
                       }}
+                      className="p-2 text-left text-red-500 hover:bg-surface-2 rounded-lg"
                     >
-                      <FontAwesomeIcon icon={faRightToBracket} /> Log Out
+                      Logout
                     </button>
-                  </li>
-                </ul>
-              </>
-            ) : null}
-          </li>
-        </ul>
-      </nav>
-      <div className="flex gap-5 lg:hidden items-center">
-        <div className={`${user ? "" : "hidden"} hover:text-gray-700`}>
-          <button>
-            <FontAwesomeIcon icon={faCoins} /> {user?.rewardPoints.toFixed(2)}
-          </button>
-        </div>
-        <div className="hover:text-gray-700">
-          <button
-            className="cursor-pointer relative"
-            onClick={() => {
-              navi("/cart");
-            }}
-          >
-            <FontAwesomeIcon icon={faShoppingCart} />
-            <span
-              className={`${cart.length == 0 ? "hidden" : "block"} rounded-[50%] h-6 w-6 text-white items-center justify-center bg-red-400 absolute -right-4 -top-4`}
-            >
-              {totalItems}
-            </span>
-          </button>
-        </div>
-        <div className="relative text-center flex">
-          <button onClick={() => navi(`/me`)}></button>
-
-          <button
-            onClick={() => setNavV(navV ? false : true)}
-            className="cursor-pointer"
-          >
-            {user ? (
-              <img
-                className="pfp"
-                src={user?.profilePic || `/placeholder-avatar.jpg`}
-                alt={user?.firstName}
-              />
+                  </div>
+                )}
+              </div>
             ) : (
-              <FontAwesomeIcon icon={faBars} />
+              <button
+                onClick={() => navi("/login")}
+                className="bg-primary flex items-center gap-2 p-2 px-3 rounded-lg hover:bg-surface-2"
+              >
+                Log In
+              </button>
             )}
-          </button>
 
-          <ul
-            className={`${navV ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} flex p-5 absolute top-15 -left-22 bg-gray-300 transition rounded-lg flex-col gap-5 items-center`}
-          >
-            <li className="hover:text-gray-700">
-              <Link onClick={() => setNavV(!navV)} to="/">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="lg:hidden p-2 rounded-lg hover:bg-surface-2"
+            >
+              <FontAwesomeIcon icon={faBars} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {menuOpen && (
+        <div className="fixed inset-0 z-100 lg:hidden">
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setMenuOpen(false)}
+          />
+
+          <div className="absolute bottom-0 left-0 w-full bg-surface rounded-t-2xl p-5 flex flex-col gap-4 animate-[slideUp_0.25s_ease-out]">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted">Menu</span>
+              <button onClick={() => setMenuOpen(false)}>
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3 text-sm">
+              <Link onClick={() => setMenuOpen(false)} to="/">
                 Home
               </Link>
-            </li>
-            {/* <li className="hover:text-gray-700">
-              <Link onClick={() => setNavV(!navV)} to="/products/featured">
-                Featured
-              </Link>
-            </li> */}
-            <li className="hover:text-gray-700">
-              <Link onClick={() => setNavV(!navV)} to="/products">
+              <Link onClick={() => setMenuOpen(false)} to="/products">
                 Products
               </Link>
-            </li>
-            <li className="hover:text-gray-700">
-              <Link onClick={() => setNavV(!navV)} to="/categories">
+              <Link onClick={() => setMenuOpen(false)} to="/categories">
                 Categories
               </Link>
-            </li>
 
-            <hr className={`${user ? "" : "hidden"} w-full text-black`} />
-            <li className="hover:text-gray-700">
-              <Link onClick={() => setNavV(!navV)} to="/me">
-                Profile
-              </Link>
-            </li>
-            {user?.roles?.includes("Admin") ? (
-              <li>
-                <Link onClick={() => setNavV(!navV)} to={"/admin"}>
-                  Admin Panel
+              <hr className="text-muted" />
+
+              {user && (
+                <Link
+                  className="flex gap-1"
+                  onClick={() => setMenuOpen(false)}
+                  to="/me"
+                >
+                  <img
+                    className="rounded-[50%]"
+                    src={user?.profilePic}
+                    height={20}
+                    width={20}
+                  />{" "}
+                  Profile
                 </Link>
-              </li>
-            ) : null}
-            <li onClick={() => setNavV(!navV)} className="p-1">
+              )}
+
+              <ThemeDropdown />
+
+              {user?.roles?.includes("Admin") && (
+                <Link onClick={() => setMenuOpen(false)} to="/admin">
+                  <FontAwesomeIcon icon={faToolbox} /> Admin
+                </Link>
+              )}
+
               <button
                 onClick={() => {
-                  user
-                    ? (() => {
-                        logout();
-                        navi("/");
-                      })()
-                    : navi("/login");
+                  user ? logout() : navi("/login");
+                  setMenuOpen(false);
                 }}
+                className="text-left text-red-500"
               >
-                {user ? "Log Out" : "Log In"}
+                <FontAwesomeIcon icon={faRightToBracket} />
+                {user ? " Logout" : " Login"}
               </button>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 };
 

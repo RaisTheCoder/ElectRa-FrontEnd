@@ -62,6 +62,7 @@ export const CartProvider = ({ children }) => {
     try {
       const res = await api.post("/cart/validate", currentCart);
       setValidatedCart(res.data);
+      console.log(res.data);
     } catch {
       setValidatedCart([]);
     }

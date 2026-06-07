@@ -1,7 +1,7 @@
 import {
   faDiscord,
   faInstagram,
-  faTwitter,
+  faTelegram,
   faWhatsapp,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
@@ -11,107 +11,116 @@ import React from "react";
 import { Link } from "react-router";
 
 const Footer = () => {
-  return (
-    <footer className="flex min-h-90 gap-10 px-15 py-5 bg-[#F0F0F0]">
-      <section className="flex gap-5 flex-wrap flex-col md:flex-row w-full h-full justify-between">
-        <section>
-          <section className="w-75 h-full flex flex-col gap-5">
-            <h3 className="text-3xl flex items-center">
-              <img src="/e.png" className="h-15 w-15" />
-              lectRa™
-            </h3>
-            <p>
-              ElectRa is a mockery Electronics Store web project to demonstrate
-              my skills while showcasing how would I make electronics store
-              industry better.
-            </p>
-            <hr />
-            <ul>
-              <li className="hover:text-gray-700 w-fit">
-                Phone: <Link to="tel://+12345678910">+12345678910</Link>
-              </li>
-              <li className="hover:text-gray-700 w-fit">
-                Email:{" "}
-                <Link target="blank" to="mailto://">
-                  support@electra.com
-                </Link>
-              </li>
-            </ul>
-          </section>
-        </section>
-        <section className="flex h-full flex-col md:flex-row flex-wrap gap-10">
-          <section className="min-w-75 h-full flex flex-col gap-5">
-            <div>
-              <h3 className="text-3xl">Stay Connected</h3>
-              <p className="text-[12px]">
-                Subscribe to our newsletter for updates and offers!
-              </p>
-            </div>
-            <hr />
-            <div className="flex gap-2 items-center">
-              <input
-                className="bg-gray-300 p-3 rounded-lg"
-                type="text"
-                placeholder="Enter email here..."
-              />
-              <button className="h-12 w-12 bg-gray-300 rounded-lg">
-                <FontAwesomeIcon icon={faArrowRight} />
-              </button>
-            </div>
-            <div className="grid grid-cols-4 gap-5 justify-center self-center">
-              <Link
-                className="w-12 h-12 rounded-[50%] bg-gray-300 flex justify-center items-center"
-                to={"/"}
-              >
-                <FontAwesomeIcon icon={faInstagram} />
-              </Link>
-              <Link
-                className="w-12 h-12 rounded-[50%] bg-gray-300 flex justify-center items-center"
-                to={"/"}
-              >
-                <FontAwesomeIcon icon={faWhatsapp} />
-              </Link>
-              <Link
-                className="w-12 h-12 rounded-[50%] bg-gray-300 flex justify-center items-center"
-                to={"/"}
-              >
-                <FontAwesomeIcon icon={faDiscord} />
-              </Link>
-              <Link
-                className="w-12 h-12 rounded-[50%] bg-gray-300 flex justify-center items-center"
-                to={"/"}
-              >
-                <FontAwesomeIcon icon={faXTwitter} />
-              </Link>
-            </div>
-          </section>
+  const socials = [
+    { icon: faInstagram, to: "https://instagram.com/rai-ko007" },
+    { icon: faWhatsapp, to: "/" },
+    { icon: faTelegram, to: "/" },
+    { icon: faXTwitter, to: "/" },
+    { icon: faDiscord, to: "/" },
+  ];
 
-          <section className="min-w-75 h-full flex flex-col gap-5">
-            <div>
-              <h3 className="text-3xl">Navigate</h3>
-            </div>
-            <hr />
-            <ul className="grid grid-cols-2">
-              <div>
-                <li className="hover:text-gray-700 w-fit h-10">
-                  <Link to="/">Home</Link>
-                </li>
-                <li className="hover:text-gray-700 w-fit h-10">
-                  <Link to="/categories">Categories</Link>
-                </li>
-                <li className="hover:text-gray-700 w-fit h-10">
-                  <Link to="/about">About Us</Link>
-                </li>
-              </div>
-              <div>
-                <li className="hover:text-gray-700 w-fit h-10">
-                  <Link to="/products">Products</Link>
-                </li>
-              </div>
-            </ul>
-          </section>
+  return (
+    <footer className="bg-surface text-fg border-t border-border">
+      <div className="container mx-auto px-6 py-12 grid gap-12 md:grid-cols-3">
+        <section className="flex flex-col gap-5">
+          <h3 className="text-2xl font-bold flex items-center">
+            <img src="/e.png" className="h-10 w-10" />
+            lectRa
+          </h3>
+
+          <p className="text-muted text-sm leading-relaxed">
+            ElectRa is a modern electronics marketplace concept built to
+            demonstrate clean UI, structured architecture, and scalable design
+            systems.
+          </p>
+
+          <div className="text-sm text-muted space-y-1">
+            <p>
+              Phone:{" "}
+              <Link className="hover:text-fg transition" to="tel:+12345678910">
+                +12345678910
+              </Link>
+            </p>
+            <p>
+              Email:{" "}
+              <Link
+                className="hover:text-fg transition"
+                to="mailto:support@electra.com"
+              >
+                support@electra.com
+              </Link>
+            </p>
+          </div>
         </section>
-      </section>
+
+        <section className="flex flex-col gap-5">
+          <div>
+            <h3 className="text-xl font-semibold">Stay in the loop</h3>
+            <p className="text-muted text-sm">
+              Get updates, deals, and new products.
+            </p>
+          </div>
+
+          <div className="flex gap-2">
+            <input
+              className="flex-1 bg-surface border border-border rounded-lg px-3 py-2 text-sm outline-none focus:border-primary"
+              placeholder="Enter your email..."
+            />
+
+            <button className="w-11 h-11 rounded-lg bg-primary hover:bg-primary-hover text-white flex items-center justify-center transition">
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+
+          <div className="flex gap-3 pt-2">
+            {socials.map((s, i) => (
+              <Link
+                key={i}
+                to={s.to}
+                className="w-10 h-10 rounded-full bg-surface hover:bg-border flex items-center justify-center transition"
+              >
+                <FontAwesomeIcon icon={s.icon} />
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-5">
+          <h3 className="text-xl font-semibold">Navigate</h3>
+
+          <div className="grid grid-cols-2 gap-2 text-sm text-muted">
+            <Link className="hover:text-fg transition" to="/">
+              Home
+            </Link>
+            <Link className="hover:text-fg transition" to="/products">
+              Products
+            </Link>
+            <Link className="hover:text-fg transition" to="/categories">
+              Categories
+            </Link>
+            <Link className="hover:text-fg transition" to="/about">
+              About
+            </Link>
+          </div>
+        </section>
+      </div>
+
+      <div className="border-t border-border">
+        <div className="container mx-auto px-6 py-4 text-xs text-muted flex justify-between">
+          <p>© {new Date().getFullYear()} ElectRa. All rights reserved.</p>
+          <p className="hidden md:block">
+            Built with passion by Rais F. (
+            <a
+              href="https://rai-ko.vercel.app"
+              target="_blank"
+              className="text-primary"
+            >
+              Aka. ScorAXE/Raiko
+            </a>
+            )
+          </p>
+        </div>
+      </div>
     </footer>
   );
 };

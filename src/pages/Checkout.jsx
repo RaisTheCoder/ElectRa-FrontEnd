@@ -61,7 +61,7 @@ const Checkout = () => {
   const formik = useFormik({
     initialValues: {
       address: user?.address || "",
-      phone: user?.phone || "",
+      phone: user?.phoneNumber || "",
       note: "",
     },
     validationSchema: CheckoutSchema,
@@ -95,12 +95,12 @@ const Checkout = () => {
   }
 
   return (
-    <section className="min-h-screen bg-gray-100 flex justify-center p-4">
+    <section className="min-h-screen flex justify-center p-4">
       <Helmet>
         <title>Checkout - ElectRa</title>
       </Helmet>
       <div className="w-full max-w-5xl grid md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow p-6 space-y-4">
+        <div className="bg-surface rounded-xl shadow p-6 space-y-4">
           <h2 className="text-xl font-bold">Your Cart</h2>
 
           <div className="space-y-3">
@@ -110,8 +110,10 @@ const Checkout = () => {
                 className="flex justify-between border-b pb-2 text-sm"
               >
                 <div>
-                  <p className="font-semibold">{item.title}</p>
-                  <p className="text-gray-500">x{item.quantity}</p>
+                  <p className="font-semibold">
+                    {item.brand?._Name} {item.title}
+                  </p>
+                  <p className="text-muted">x{item.quantity}</p>
                 </div>
 
                 <div className="text-right">
@@ -147,11 +149,11 @@ const Checkout = () => {
 
             {usePoints && (
               <div className="space-y-2 text-sm">
-                <p className="text-gray-500">
+                <p className="text-muted">
                   Available: {user?.rewardPoints} points
                 </p>
 
-                <p className="text-gray-500">
+                <p className="text-muted">
                   Max usable: {maxUsablePoints} points (15% out of Total Price)
                 </p>
 
@@ -172,7 +174,7 @@ const Checkout = () => {
 
         <form
           onSubmit={formik.handleSubmit}
-          className="bg-white rounded-xl shadow p-6 space-y-4"
+          className="bg-surface rounded-xl shadow p-6 space-y-4"
         >
           <h2 className="text-xl font-bold">Shipping Info</h2>
 
@@ -180,7 +182,7 @@ const Checkout = () => {
             name="address"
             value={formik.values.address}
             onChange={formik.handleChange}
-            className="w-full border p-3 rounded-lg"
+            className="w-full border border-border focus:ring-2 focus:ring-primary p-3 rounded-lg"
             placeholder="Address"
           />
 
@@ -188,7 +190,7 @@ const Checkout = () => {
             name="phone"
             value={formik.values.phone}
             onChange={formik.handleChange}
-            className="w-full border p-3 rounded-lg"
+            className="w-full border border-border focus:ring-2 focus:ring-primary p-3 rounded-lg"
             placeholder="Phone"
           />
 
@@ -196,17 +198,17 @@ const Checkout = () => {
             name="note"
             value={formik.values.note}
             onChange={formik.handleChange}
-            className="w-full border p-3 rounded-lg"
+            className="w-full border border-border focus:ring-2 focus:ring-primary p-3 rounded-lg"
             placeholder="Note"
           />
 
-          <h3 className="font-semibold text-gray-700">Payment Info</h3>
+          <h3 className="font-semibold text-muted">Payment Info</h3>
 
           <input
             name="cardNumber"
             value={formik.values.cardNumber}
             onChange={formik.handleChange}
-            className="w-full border p-3 rounded-lg"
+            className="w-full border border-border focus:ring-2 focus:ring-primary p-3 rounded-lg"
             placeholder="Card Number"
           />
 
@@ -215,7 +217,7 @@ const Checkout = () => {
               name="expiry"
               value={formik.values.expiry}
               onChange={formik.handleChange}
-              className="w-full border p-3 rounded-lg"
+              className="w-full border border-border focus:ring-2 focus:ring-primary p-3 rounded-lg"
               placeholder="MM/YY"
             />
 
@@ -223,7 +225,7 @@ const Checkout = () => {
               name="cvc"
               value={formik.values.cvc}
               onChange={formik.handleChange}
-              className="w-full border p-3 rounded-lg"
+              className="w-full border border-border focus:ring-2 focus:ring-primary p-3 rounded-lg"
               placeholder="CVC"
             />
           </div>
@@ -232,7 +234,7 @@ const Checkout = () => {
             name="cardName"
             value={formik.values.cardName}
             onChange={formik.handleChange}
-            className="w-full border p-3 rounded-lg"
+            className="w-full border border-border focus:ring-2 focus:ring-primary p-3 rounded-lg"
             placeholder="Name on card"
           />
 

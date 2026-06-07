@@ -48,7 +48,7 @@ const OrderForm = () => {
   }, [id]);
 
   return (
-    <article className="bg-gray-100 rounded-lg p-5">
+    <article className="bg-surface rounded-lg p-5">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="formGroup">
           <label>Status</label>

@@ -21,9 +21,32 @@ const Home = () => {
 
   const navi = useNavigate();
 
-  const { cart, addItem } = useCart();
+  const { cart, addItem, removeItem } = useCart();
 
   const inCart = (id) => cart.some((i) => i.productId === id);
+
+  const features = [
+    {
+      icon: faHandshake,
+      title: "Reliable Prices",
+      desc: "No more overpaying for retail markups...",
+    },
+    {
+      icon: faBasketShopping,
+      title: "Easy Access",
+      desc: "Products you used to hunt for...",
+    },
+    {
+      icon: faList,
+      title: "Wide Selection",
+      desc: "From everyday electronics to rare components...",
+    },
+    {
+      icon: faCoins,
+      title: "Gamified Shopping",
+      desc: "Get bonuses, promotions and rewards...",
+    },
+  ];
 
   useEffect(() => {
     fetch();
@@ -65,7 +88,7 @@ const Home = () => {
           </div>
         </article>
       </section>
-      <section className="flex gap-10 flex-col justify-center items-center py-15 bg-gray-100">
+      <section className="flex gap-10 flex-col justify-center items-center bg-surface-2 py-15">
         <aside className="text-center items-center flex flex-col gap-2">
           <h2 className="text-2xl font-bold">
             Revolutionizing Electronics Shopping
@@ -77,49 +100,16 @@ const Home = () => {
         </aside>
 
         <article className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faHandshake} />
-              <strong>Reliable Prices</strong>
+          {features.map((f) => (
+            <div
+              key={f.title}
+              className="flex flex-col p-3 justify-center items-center gap-5 bg-card h-50 w-70 rounded-lg text-center"
+            >
+              <FontAwesomeIcon icon={f.icon} />
+              <strong>{f.title}</strong>
+              <p className="text-sm text-muted">{f.desc}</p>
             </div>
-            <p className="text-[14px]">
-              No more overpaying for retail markups. Get fair, transparent
-              pricing you can trust.
-            </p>
-          </div>
-
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faBasketShopping} />
-              <strong>Easy access</strong>
-            </div>
-            <p className="text-[14px]">
-              Products you used to hunt for on foreign e-commerce platforms are
-              now available locally. No customs stress, no long waits.
-            </p>
-          </div>
-
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faList} />
-              <strong>Wide Selection</strong>
-            </div>
-            <p className="text-[14px]">
-              From everyday electronics to rare components. Find exactly what
-              you need without endless searching.
-            </p>
-          </div>
-
-          <div className="flex flex-col p-3 justify-center items-center gap-5 bg-gray-200 h-50 w-70 rounded-lg text-center">
-            <div className="flex gap-3 flex-col justify-center items-center">
-              <FontAwesomeIcon icon={faCoins} />
-              <strong>Gamified Shopping</strong>
-            </div>
-            <p className="text-[14px]">
-              Get bonuses, promotions and rewards for every product you get for
-              your needs.
-            </p>
-          </div>
+          ))}
         </article>
       </section>
 
@@ -138,7 +128,6 @@ const Home = () => {
             spaceBetween={30}
             freeMode={true}
             modules={[FreeMode, Pagination]}
-            className=""
           >
             {loading ? (
               <div className="flex justify-center w-full">
@@ -148,24 +137,24 @@ const Home = () => {
               products.map((product) => (
                 <SwiperSlide
                   key={product.id}
-                  className="duration-200 rounded-xl flex flex-col !w-[250px] cursor-pointer border border-gray-200
-                hover:shadow-xl hover:-translate-y-1 transition-all!"
+                  className="group duration-200 rounded-xl flex flex-col !w-[250px] cursor-pointer border overflow-hidden bg-card border-border transition-all"
+                  onClick={() => navi(`/products/${product.id}`)}
                 >
-                  <div className="h-52 bg-gray-50 flex items-center justify-center overflow-hidden">
+                  <div className="h-52 bg-surface flex items-center justify-center overflow-hidden">
                     <img
                       src={product.thumbnail}
                       alt={product.title}
-                      className="h-full w-full object-contain group-hover:scale-105 transition duration-300"
+                      className="h-full w-full object-cover group-hover:scale-105 transition"
                     />
                   </div>
 
                   <div className="p-4 flex flex-col gap-3 flex-1">
                     <div className="space-y-1">
-                      <h3 className="text-sm truncate font-semibold line-clamp-2 text-gray-800">
+                      <h3 className="text-sm truncate font-semibold line-clamp-2 text-fg">
                         {product?.brand?._Name} {product.title}
                       </h3>
 
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-muted">
                         {product.subCategory?._Name}
                       </span>
                     </div>
@@ -211,43 +200,37 @@ const Home = () => {
                           (i) => i.productId === product.id,
                         );
 
-                        if (!item) {
-                          return (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                addItem(product.id);
-                              }}
-                              className="px-4 py-2 rounded-lg bg-[#0A9ACF] text-white text-sm font-medium hover:opacity-90 transition"
-                            >
-                              Add to Cart
-                            </button>
-                          );
-                        }
-
-                        return (
+                        return item ? (
                           <div
-                            className="flex items-center justify-between gap-2"
+                            className="flex items-center justify-between bg-surface rounded-lg"
                             onClick={(e) => e.stopPropagation()}
                           >
                             <button
-                              className="min-w-10 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-sm font-medium hover:opacity-90 transition"
+                              className="min-w-10 bg-surface-2 text-white py-2 rounded-lg hover:opacity-90 transition"
                               onClick={() => removeItem(product.id)}
                             >
                               -
                             </button>
 
-                            <span className="font-medium min-w-[24px] text-center">
-                              {item.quantity}
-                            </span>
+                            <span>{item.quantity}</span>
 
                             <button
-                              className="min-w-10 py-2 rounded-lg bg-[#0A9ACF] min-w-3 text-white text-sm font-medium hover:opacity-90 transition"
+                              className="min-w-10 bg-primary text-white py-2 rounded-lg hover:opacity-80 transition"
                               onClick={() => addItem(product.id)}
                             >
                               +
                             </button>
                           </div>
+                        ) : (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              addItem(product.id);
+                            }}
+                            className="bg-primary text-white py-2 rounded-lg hover:opacity-90"
+                          >
+                            Add to Cart
+                          </button>
                         );
                       })()}
                     </div>

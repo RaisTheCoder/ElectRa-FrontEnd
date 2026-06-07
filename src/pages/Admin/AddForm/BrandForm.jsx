@@ -60,7 +60,7 @@ const BrandForm = () => {
   });
 
   return (
-    <article className="bg-gray-100 rounded-lg">
+    <article className="bg-surface rounded-lg">
       <form onSubmit={handleSubmit} className="formStyle">
         <div className="flex flex-col gap-5">
           <div className="formGroup">

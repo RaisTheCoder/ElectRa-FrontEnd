@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import api from "../api/client";
 import { useNavigate } from "react-router";
@@ -6,7 +5,6 @@ import { Helmet } from "react-helmet";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
-
   const navi = useNavigate();
 
   useEffect(() => {
@@ -16,45 +14,49 @@ const Category = () => {
     })();
   }, []);
 
-  console.log(categories);
-
   return (
-    <section className="py-10 gap-10 flex flex-col min-h-screen items-center text-center">
+    <section className="min-h-screen py-10 bg-bg text-fg">
       <Helmet>
         <title>Categories - ElectRa</title>
       </Helmet>
-      <article className="flex flex-col gap-10 p-3">
-        {categories.map((category) => {
-          return (
-            <div
-              key={category.id}
-              className="flex flex-col gap-3 hover:cursor-pointer"
+
+      <article className="container mx-auto flex flex-col gap-12 px-5">
+        {categories.map((category) => (
+          <div key={category.id} className="flex flex-col gap-5">
+            {/* CATEGORY TITLE */}
+            <h3
+              onClick={() => navi(`/products/by/${category.slug}`)}
+              className="text-2xl md:text-3xl font-bold cursor-pointer hover:text-primary transition w-fit"
             >
-              <h3
-                className="text-left text-2xl font-bold"
-                onClick={() => navi(`/products/by/${category.slug}`)}
-              >
-                {category._Name}
-              </h3>
-              <div className="grid gap-5 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-                {category?.subCategories?.map((sub) => {
-                  return (
-                    <div
-                      onClick={() =>
-                        navi(`/products/by/${category.slug}/${sub.slug}`)
-                      }
-                      className="relative cursor-pointer hover:border-[#0A9ACF] hover:bg-gray-200 transition duration-200 hover:-translate-y-1 hover:shadow-2xl flex border border-[rgba(0,0,0,0.15)] rounded-lg w-50 h-30 p-5 lg:w-80 lg:h-60"
-                    >
-                      <h3 className="self-end text-left font-bold text-1xl lg:text-2xl">
-                        {sub._Name}
-                      </h3>
-                    </div>
-                  );
-                })}
-              </div>
+              {category._Name}
+            </h3>
+
+            {/* SUB CATEGORIES GRID */}
+            <div className="grid gap-5 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+              {category?.subCategories?.map((sub) => (
+                <div
+                  key={sub.id}
+                  onClick={() =>
+                    navi(`/products/by/${category.slug}/${sub.slug}`)
+                  }
+                  className="
+                    group cursor-pointer
+                    bg-card border border-border
+                    rounded-xl p-5
+                    min-h-[120px] md:min-h-[160px]
+                    flex items-end
+                    transition
+                    hover:-translate-y-1 hover:shadow-lg hover:border-primary
+                  "
+                >
+                  <h3 className="text-lg md:text-xl font-semibold group-hover:text-primary transition">
+                    {sub._Name}
+                  </h3>
+                </div>
+              ))}
             </div>
-          );
-        })}
+          </div>
+        ))}
       </article>
     </section>
   );

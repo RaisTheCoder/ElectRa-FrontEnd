@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 text-center px-6">
+    <div className="min-h-screen flex flex-col justify-center items-center text-center px-6">
       <Helmet>
         <title>Not Found - ElectRa</title>
       </Helmet>
-      <h1 className="text-7xl font-bold text-[#0A9ACF]">404</h1>
+      <h1 className="text-7xl font-bold text-primary">404</h1>
 
       <p className="text-2xl font-semibold mt-4">Page not found</p>
 
-      <p className="text-gray-500 mt-2 max-w-md">
+      <p className="text-muted mt-2 max-w-md">
         The page you’re looking for doesn’t exist, was moved, or you typed the
         URL wrong.
       </p>
@@ -26,7 +26,7 @@ const NotFound = () => {
 
         <Link
           to="/products"
-          className="px-5 py-3 rounded-lg bg-gray-300 hover:bg-gray-400 transition"
+          className="px-5 py-3 rounded-lg bg-surface hover:bg-surface-2 transition"
         >
           Browse Products
         </Link>

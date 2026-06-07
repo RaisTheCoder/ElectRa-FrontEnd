@@ -85,7 +85,7 @@ const Categories = () => {
       <div className="flex gap-5">
         <input
           type="text"
-          className="w-full bg-gray-200 rounded-lg h-10 p-5"
+          className="w-full bg-surface-2 rounded-lg h-10 p-5"
           placeholder="Search..."
           ref={search}
           onClick={() => focusInput()}
@@ -94,23 +94,15 @@ const Categories = () => {
           }}
         />
         <button
-          className="p-2 px-3 rounded-lg cursor-pointer bg-gray-200"
+          className="p-2 px-3 rounded-lg cursor-pointer bg-surface-2"
           onClick={() => filterCategories()}
         >
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
 
-      {loading && (
-        <div className="flex justify-center py-10">
-          <TailSpin height={60} width={60} color="#0A9ACF" />
-        </div>
-      )}
-
       <div className="overflow-x-auto rounded-xl bg-white">
-        <table
-          className={`${loading ? "opacity-0" : "opacity-100"} app-table transition-opacity duration-500 w-full table-fixed`}
-        >
+        <table className="app-table transition-opacity duration-500 w-full table-fixed">
           <thead>
             <tr>
               <th>Name</th>
@@ -180,6 +172,12 @@ const Categories = () => {
           </tbody>
         </table>
       </div>
+
+      {loading && (
+        <div className="flex justify-center py-10">
+          <TailSpin height={60} width={60} color="#0A9ACF" />
+        </div>
+      )}
 
       <button
         onClick={() => {

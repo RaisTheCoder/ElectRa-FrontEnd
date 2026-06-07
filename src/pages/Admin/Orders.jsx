@@ -73,12 +73,6 @@ const Orders = () => {
 
   return (
     <article className="flex flex-col gap-5">
-      {loading && (
-        <div className="flex justify-center py-10">
-          <TailSpin height={60} width={60} color="#0A9ACF" />
-        </div>
-      )}
-
       <div className="flex gap-3">
         <input
           ref={input}
@@ -86,13 +80,13 @@ const Orders = () => {
             e.key == "Enter" ? setSearch(input.current.value) : null
           }
           placeholder="Search by ID..."
-          className="w-full bg-gray-200 rounded-lg h-10 px-3"
+          className="w-full bg-surface-2 rounded-lg h-10 px-3"
         />
 
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 bg-gray-200 rounded-lg h-10"
+          className="px-3 bg-surface-2 rounded-lg h-10"
         >
           <option value="All">All</option>
           {OrderStatus.map((s) => (
@@ -103,15 +97,15 @@ const Orders = () => {
         </select>
 
         <button
-          className="px-3 bg-gray-200 rounded-lg"
+          className="px-3 bg-surface-2 rounded-lg"
           onClick={() => setSearch(input.current.value)}
         >
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
-        <table className="app-table">
+      <div className="overflow-x-auto rounded-xl bg-white">
+        <table className="app-table transition-opacity duration-500 w-full table-fixed">
           <thead className="bg-gray-100 text-left">
             <tr>
               <th className="p-3">Order</th>
@@ -146,11 +140,11 @@ const Orders = () => {
                   </div>
                 </td>
 
-                <td className="p-3 text-gray-600 max-w-[180px] truncate">
+                <td className="p-3 text-muted max-w-45 truncate">
                   {order.address}
                 </td>
 
-                <td className="p-3 text-(--electra-blue)! font-bold">
+                <td className="p-3 text-primary font-bold">
                   ${order.totalPrice.toFixed(2)}
                 </td>
 
@@ -195,12 +189,18 @@ const Orders = () => {
         </table>
       </div>
 
+      {loading && (
+        <div className="flex justify-center py-10">
+          <TailSpin height={60} width={60} color="#0A9ACF" />
+        </div>
+      )}
+
       {selectedOrder && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white w-[420px] max-w-[95%] p-5 rounded-xl space-y-3">
+          <div className="bg-surface-2 w-105 max-w-[95%] p-5 rounded-xl space-y-3">
             <h2 className="text-lg font-bold">Order #{selectedOrder.id}</h2>
 
-            <div className="text-sm text-gray-600 space-y-1">
+            <div className="text-sm text-muted space-y-1">
               <p>
                 <b>User:</b> {selectedOrder.user?.firstName}{" "}
                 {selectedOrder.user?.lastName}
@@ -212,7 +212,7 @@ const Orders = () => {
 
               <div>
                 <b>Items:</b>
-                <ul>
+                <ul className="relative left-3">
                   {selectedOrder?.items.map((i) => {
                     return (
                       <li>
@@ -243,6 +243,19 @@ const Orders = () => {
                 <b>Status:</b> {OrderStatus[selectedOrder.status]}
               </p>
 
+              <p>
+                <b>Points Used:</b> {selectedOrder.pointsUsed.toFixed(2)}
+              </p>
+
+              <p>
+                <b>Points Earned:</b> {selectedOrder.earnedPoints.toFixed(2)}
+              </p>
+
+              <p>
+                <b>Points Granted:</b>{" "}
+                {selectedOrder.pointsGranted ? "Yes" : "No"}
+              </p>
+
               <p className="text-[#0A9ACF] font-bold">
                 Total: ${selectedOrder.totalPrice.toFixed(2)}
               </p>
@@ -251,7 +264,7 @@ const Orders = () => {
             <div className="flex justify-end pt-3">
               <button
                 onClick={() => setSelectedOrder(null)}
-                className="px-4 py-2 bg-gray-300 rounded-lg"
+                className="px-4 py-2 bg-surface hover:opacity-80 transition rounded-lg"
               >
                 Close
               </button>
