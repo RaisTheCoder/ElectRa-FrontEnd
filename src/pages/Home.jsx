@@ -23,8 +23,6 @@ const Home = () => {
 
   const { cart, addItem, removeItem } = useCart();
 
-  const inCart = (id) => cart.some((i) => i.productId === id);
-
   const features = [
     {
       icon: faHandshake,
@@ -150,8 +148,16 @@ const Home = () => {
 
                   <div className="p-4 flex flex-col gap-3 flex-1">
                     <div className="space-y-1">
-                      <h3 className="text-sm truncate font-semibold line-clamp-2 text-fg">
-                        {product?.brand?._Name} {product.title}
+                      <h3 className="text-sm line-clamp-2">
+                        <span className="font-bold">
+                          {product?.brand?._Name}
+                        </span>{" "}
+                        <span
+                          className={`${product.stock <= 30 && "text-red-400"}`}
+                        >
+                          {product.title}{" "}
+                          {product.stock <= 30 && `(${product.stock})`}
+                        </span>
                       </h3>
 
                       <span className="text-xs text-muted">
@@ -172,8 +178,9 @@ const Home = () => {
                         />
                       ))}
 
-                      <span className="text-xs text-gray-500 ml-1">
-                        {product.rating?.toFixed(1) || "0.0"}
+                      <span className="text-xs text-muted ml-1">
+                        {product?.rating?.toFixed(1) || "0.0"} (
+                        <span>{product?.reviews?.length}</span>)
                       </span>
                     </div>
 
