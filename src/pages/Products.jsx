@@ -247,8 +247,9 @@ const Products = () => {
                         }
                       />
                     ))}
-                    <span className="text-muted ml-1">
-                      {product.rating?.toFixed(1) || "0.0"}
+                    <span className="text-xs text-muted ml-1">
+                      {product?.rating?.toFixed(1) || "0.0"} (
+                      <span>{product?.reviews?.length}</span>)
                     </span>
                   </div>
 
