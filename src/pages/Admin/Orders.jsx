@@ -104,7 +104,7 @@ const Orders = () => {
         </button>
       </div>
 
-      <div className="overflow-x-auto rounded-xl bg-white">
+      <div className="overflow-x-auto rounded-xl">
         <table className="app-table transition-opacity duration-500 w-full table-fixed">
           <thead className="bg-gray-100 text-left">
             <tr>
