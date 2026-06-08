@@ -38,7 +38,7 @@ const Header = () => {
 
           <div className="flex items-center gap-3">
             {user && (
-              <button className="hidden sm:block text-sm text-muted">
+              <button className="text-sm text-muted">
                 <FontAwesomeIcon icon={faCoins} />{" "}
                 {user.rewardPoints?.toFixed(0)}
               </button>
