@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import api from "../api/client";
@@ -36,6 +36,27 @@ const Login = () => {
     await fetchUser();
     navi("/");
   };
+
+  const containerRef = useRef(null);
+  const [googleWidth, setGoogleWidth] = useState(300);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setGoogleWidth(containerRef.current.offsetWidth);
+      }
+    };
+
+    updateWidth();
+
+    const observer = new ResizeObserver(updateWidth);
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4">
@@ -84,7 +105,7 @@ const Login = () => {
             Log In
           </button>
 
-          <div className="grid grid-cols1">
+          <div ref={containerRef} className="grid items-center grid-cols-1">
             <GoogleLogin
               onSuccess={handleGoogle}
               theme={resolvedTheme === "dark" ? "filled_black" : "outline"}
@@ -94,6 +115,7 @@ const Login = () => {
               logo_alignment="left"
               onError={() => console.log("Google login failed")}
               buttonText="Login"
+              width={googleWidth}
             />
           </div>
         </form>
