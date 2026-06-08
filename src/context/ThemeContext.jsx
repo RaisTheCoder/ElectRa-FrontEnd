@@ -22,6 +22,13 @@ export const ThemeProvider = ({ children }) => {
     applyTheme(newTheme);
   };
 
+  const resolvedTheme =
+    theme === "system"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
+
   useEffect(() => {
     const saved = localStorage.getItem("theme") || "system";
     setThemeState(saved);
@@ -43,7 +50,7 @@ export const ThemeProvider = ({ children }) => {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme }}>
       {children}
     </ThemeContext.Provider>
   );

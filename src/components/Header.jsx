@@ -116,12 +116,16 @@ const Header = () => {
               onClick={() => setMenuOpen(!menuOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-surface-2"
             >
-              <img
-                src={user?.profilePic || "/placeholder-avatar.jpg"}
-                height={40}
-                width={40}
-                className="rounded-[50%]"
-              />
+              {user ? (
+                <img
+                  src={user?.profilePic || "/placeholder-avatar.jpg"}
+                  height={40}
+                  width={40}
+                  className="rounded-[50%]"
+                />
+              ) : (
+                <FontAwesomeIcon icon={faBars} />
+              )}
             </button>
           </div>
         </div>

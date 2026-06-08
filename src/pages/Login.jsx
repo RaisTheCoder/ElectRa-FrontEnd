@@ -1,14 +1,18 @@
 import { useFormik } from "formik";
+import React from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
-import { GoogleLogin } from "@react-oauth/google";
 import api from "../api/client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Helmet } from "react-helmet";
+import { GoogleLogin } from "@react-oauth/google";
+import { useTheme } from "../context/ThemeContext";
 
 const Login = () => {
   const navi = useNavigate();
 
   const { login } = useAuth();
+  const { resolvedTheme } = useTheme();
 
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -47,7 +51,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <input
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
               value={values.username}
               onChange={handleChange}
               type="text"
@@ -61,7 +65,7 @@ const Login = () => {
 
           <div className="space-y-2">
             <input
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border border-border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary"
               value={values.password}
               onChange={handleChange}
               type="password"
@@ -80,15 +84,18 @@ const Login = () => {
             Log In
           </button>
 
-          <GoogleLogin
-            onSuccess={handleGoogle}
-            shape="rectangular"
-            theme="outline"
-            size="large"
-            text="signin_with"
-            logo_alignment="left"
-            onError={() => console.log("Google login failed")}
-          />
+          <div className="grid grid-cols1">
+            <GoogleLogin
+              onSuccess={handleGoogle}
+              theme={resolvedTheme === "dark" ? "filled_black" : "outline"}
+              size="large"
+              shape="rectangular"
+              text="signin_with"
+              logo_alignment="left"
+              onError={() => console.log("Google login failed")}
+              buttonText="Login"
+            />
+          </div>
         </form>
 
         <div className="text-center text-sm text-gray-500">
