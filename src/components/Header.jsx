@@ -63,7 +63,7 @@ const Header = () => {
                   className="flex items-center gap-2 p-1 rounded-lg hover:bg-surface-2"
                 >
                   <img
-                    src={user?.profilePic}
+                    src={user?.profilePic || "/placeholder-avatar.jpg"}
                     className="w-8 h-8 rounded-full"
                   />
                 </button>
@@ -98,7 +98,7 @@ const Header = () => {
                       }}
                       className="p-2 text-left text-red-500 hover:bg-surface-2 rounded-lg"
                     >
-                      Logout
+                      <FontAwesomeIcon icon={faRightToBracket} /> Logout
                     </button>
                   </div>
                 )}
@@ -106,9 +106,9 @@ const Header = () => {
             ) : (
               <button
                 onClick={() => navi("/login")}
-                className="bg-primary flex items-center gap-2 p-2 px-3 rounded-lg hover:bg-surface-2"
+                className="bg-primary text-white flex items-center gap-2 p-2 px-3 rounded-lg hover:bg-surface-2"
               >
-                Log In
+                <FontAwesomeIcon icon={faRightToBracket} /> Log In
               </button>
             )}
 
@@ -116,7 +116,12 @@ const Header = () => {
               onClick={() => setMenuOpen(!menuOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-surface-2"
             >
-              <FontAwesomeIcon icon={faBars} />
+              <img
+                src={user?.profilePic || "/placeholder-avatar.jpg"}
+                height={40}
+                width={40}
+                className="rounded-[50%]"
+              />
             </button>
           </div>
         </div>
@@ -158,11 +163,11 @@ const Header = () => {
                 >
                   <img
                     className="rounded-[50%]"
-                    src={user?.profilePic}
+                    src={user?.profilePic || "/placeholder-avatar.jpg"}
                     height={20}
                     width={20}
                   />{" "}
-                  Profile
+                  {user?.firstName} {user?.lastName || ""}
                 </Link>
               )}
 

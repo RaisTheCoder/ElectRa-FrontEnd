@@ -87,15 +87,14 @@ const Users = () => {
       </div>
 
       <div className="overflow-x-auto rounded-xl">
-        <table
-          className="app-table transition-opacity duration-500 w-full table-fixed"
-        >
+        <table className="app-table transition-opacity duration-500 w-full table-fixed">
           <thead>
             <tr>
               <th>User</th>
               <th>Email</th>
               <th>Role</th>
               <th>Lockout</th>
+              <th>Deleted?</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -125,7 +124,7 @@ const Users = () => {
                   <select
                     value={user.roles?.[0] || "User"}
                     onChange={(e) => changeRole(user.id, e.target.value)}
-                    className="bg-transparent text-gray-700 text-sm focus:outline-none cursor-pointer"
+                    className="bg-transparent text-muted text-sm focus:outline-none cursor-pointer"
                   >
                     <option value="Customer">Customer</option>
                     <option value="Manager">Manager</option>
@@ -136,16 +135,20 @@ const Users = () => {
                 <td className="px-6 py-2">
                   <span
                     className={`inline-flex items-center text-xs font-medium ${
-                      user.lockoutEnabled ? "text-emerald-500" : "text-red-500"
+                      user.lockoutEnabled ? "text-red-500" : "text-emerald-500"
                     }`}
                   >
                     <span
                       className={`w-1.5 h-1.5 rounded-full mr-2 ${
-                        user.lockoutEnabled ? "bg-red-500" : "bg-emerald-500"
+                        user.lockoutEnabled ? "bg-emerald-500" : "bg-red-500"
                       }`}
                     />
-                    {user.lockoutEnabled ? "Disabled" : "Locked"}
+                    {user?.lockoutEnabled ? "Locked" : "Disabled"}
                   </span>
+                </td>
+
+                <td>
+                  {user?.isDeleted ? "Yes" : "No"}
                 </td>
 
                 <td className="actions-cell">

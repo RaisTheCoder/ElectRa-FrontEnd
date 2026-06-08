@@ -28,6 +28,7 @@ const ProductForm = () => {
       stock: product.stock || 1,
       isFeatured: product.isFeatured || false,
       discountPercentage: product.discountPercentage || 0,
+      description: product.description || "Lorem ipsum dolor sit amet.",
     },
     enableReinitialize: true,
     onSubmit: async (values) => {
@@ -40,6 +41,7 @@ const ProductForm = () => {
       formData.append("stock", values.stock);
       formData.append("isFeatured", values.isFeatured);
       formData.append("discountPercentage", values.discountPercentage);
+      formData.append("description", values.description);
 
       if (values.thumbnail instanceof File) {
         formData.append("formFile", values.thumbnail);
@@ -217,6 +219,18 @@ const ProductForm = () => {
             <option value={false}>No</option>
             <option value={true}>Yes</option>
           </select>
+        </div>
+
+        <div className="formGroup">
+          <label htmlFor="description">Description</label>
+          <textarea
+            placeholder="Description..."
+            value={values.description}
+            onChange={handleChange}
+            name="description"
+            id="description"
+            className="min-h-15"
+          ></textarea>
         </div>
 
         <div className="formGroup grid! grid-cols-2 gap-3">

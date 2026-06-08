@@ -133,9 +133,13 @@ const Product = () => {
               <span>{product?.subCategory?._Name}</span>
             </div>
 
-            <p className="text-red-400">{product.stock} remaining!</p>
+            <p
+              className={`${product.stock <= 30 ? "" : "hidden"} text-red-400`}
+            >
+              {product.stock} remaining!
+            </p>
 
-            <p className="text-muted max-w-2xl max-h-50 overflow-scroll">
+            <p className={`${product?.description && "inline-flex"} text-muted max-w-2xl max-h-50 overflow-scroll`}>
               {product?.description}
             </p>
           </article>
